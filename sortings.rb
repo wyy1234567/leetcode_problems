@@ -41,12 +41,32 @@ def merge(left, right)
 end
 
 
+#insertion sort
+#gradually find & remove the minimum element in the given array, then push it to a new arr
+def insertion_sort(array)
+
+    ans = []
+    while !array.empty? do 
+        min = remove_min(array)
+        ans << min
+    end
+    ans
+end
+
+def remove_min(array)
+    min = array[0]
+    array.each do |num|
+        if num < min
+            min = num
+        end
+    end
+    array.delete(min)
+    min
+end
+
+
 #quick sort
 
-#insertion sort
-
-
-
-
 # print selection_sort([5, 4, 3, 2, 1])
-print merge_sort([5, 4, 3, 2, 1])
+# print merge_sort([5, 4, 3, 2, 1])
+print insertion_sort([5, 4, 3, 2, 1])
