@@ -37,7 +37,7 @@ def selection_sort(matrix)
     matrix  
 end
 
-print selection_sort([[1,100],[11,22],[1,11],[2,12]])
+# print selection_sort([[1,100],[11,22],[1,11],[2,12]])
 
 #merge sort
 #sort the array in two halfs, then merge them together
@@ -85,10 +85,38 @@ end
 
 
 #quick sort
+#Find an element(pivot) which divides the array to two parts, left is smaller ones, right is larger ones
+#step1: bring pivot to apropiate position; step2: quick sort the left; step3: quick sort the right
+#pivot is always selected as the last element in the array
+
+def quick_sort(arr, low, high)
+    if low < high
+        position = partition(arr, low, high)
+        quick_sort(arr, 0, position - 1)
+        quick_sort(arr, position + 1, high)
+    end
+    arr
+end
+
+def partition(arr, low, high)
+    pivot = arr[high]
+    i = low - 1 
+    for j in low..high - 1 do 
+        if arr[j] <= pivot
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+        end
+    end
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    i + 1
+end
+
 
 # print selection_sort([5, 4, 3, 2, 1])
 # print merge_sort([5, 4, 3, 2, 1])
 # print insertion_sort([5, 4, 3, 2, 1])
+print quick_sort([5, 4, 3, 2, 1], 0, 4)
+print quick_sort([10, 80, 30, 90, 40, 50, 70], 0, 6)
 
 
 
