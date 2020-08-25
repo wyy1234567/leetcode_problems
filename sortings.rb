@@ -20,6 +20,25 @@ def selection_sort(array)
     array
 end
 
+#selection sort on matrix with input: [[1, 2], [4, 8], [2, 8], [1, 100]]
+def selection_sort(matrix)
+    n = matrix.size - 1
+    for i in 0..n do
+        min = i
+        for j in (i + 1)..n do 
+            min = j if matrix[j][0] < matrix[min][0]
+        end
+        if min != i
+            temp = matrix[min]
+            matrix[min] = matrix[i]
+            matrix[i] = temp
+        end
+    end
+    matrix  
+end
+
+print selection_sort([[1,100],[11,22],[1,11],[2,12]])
+
 #merge sort
 #sort the array in two halfs, then merge them together
 def merge_sort(array)
@@ -69,4 +88,7 @@ end
 
 # print selection_sort([5, 4, 3, 2, 1])
 # print merge_sort([5, 4, 3, 2, 1])
-print insertion_sort([5, 4, 3, 2, 1])
+# print insertion_sort([5, 4, 3, 2, 1])
+
+
+
