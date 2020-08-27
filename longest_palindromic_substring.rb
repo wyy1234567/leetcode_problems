@@ -18,12 +18,9 @@ def longest_palindrome(s)
         end
     end
 
-    # i = 0
-
     for i in 0..s.length do 
         expand(s, i, i)
         expand(s, i, i + 1) 
-        i += 1
     end
 
     s[@low..(@low + @max - 1)]

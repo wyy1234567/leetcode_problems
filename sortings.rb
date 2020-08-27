@@ -12,9 +12,10 @@ def selection_sort(array)
 
         #swap current with min
         if min != i
-            temp = array[min]
-            array[min] = array[i]
-            array[i] = temp
+            array[i], array[min] = array[min], array[i]
+            # temp = array[min]
+            # array[min] = array[i]
+            # array[i] = temp
         end
     end
     array
@@ -112,11 +113,11 @@ def partition(arr, low, high)
 end
 
 
-# print selection_sort([5, 4, 3, 2, 1])
-# print merge_sort([5, 4, 3, 2, 1])
-# print insertion_sort([5, 4, 3, 2, 1])
-print quick_sort([5, 4, 3, 2, 1], 0, 4)
-print quick_sort([10, 80, 30, 90, 40, 50, 70], 0, 6)
+print selection_sort([5, 4, 3, 2, 1])
+# # print merge_sort([5, 4, 3, 2, 1])
+# # print insertion_sort([5, 4, 3, 2, 1])
+# print quick_sort([5, 4, 3, 2, 1], 0, 4)
+# print quick_sort([10, 80, 30, 90, 40, 50, 70], 0, 6)
 
 
 
