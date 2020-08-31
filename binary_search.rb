@@ -35,14 +35,13 @@ def search_target(nums, target)
     return -1
 end
 
-puts search_target([1,2,2,4,5,5], 2)
-puts search_target([1,2,2,4,5,5], 3)
+# puts search_target([1,2,2,4,5,5], 2)
+# puts search_target([1,2,2,4,5,5], 3)
 
 
 #find target in a rotated array 
 #input [10, 12, 14, 18, 1, 4], target = 1
 #output = 4
-
 
 def find_target(nums, target)
     return -1 if nums.empty? || !target
@@ -55,14 +54,15 @@ def find_target(nums, target)
         if nums[mid] == target
             return mid
         end
+
         if nums[start_ind] < nums[mid]
-            if nums[start_ind] <= target && target <= nums[last_ind]
+            if nums[start_ind] <= target && target <= nums[mid]
                 last_ind = mid
             else
                 start_ind = mid
             end
         else
-            if nums[start_ind] <= target && target <= nums[last_ind]
+            if nums[mid] <= target && target <= nums[last_ind]
                 start_ind = mid
             else
                 last_ind = mid
@@ -72,7 +72,11 @@ def find_target(nums, target)
 
     return start_ind if nums[start_ind] == target
     return last_ind if nums[last_ind] == target
+    return -1
 end
+
+puts find_target([10, 12, 14, 18, 1, 4], 4)
+puts find_target([10, 12, 14, 18, 1, 4], 6)
 
 #find top element in a mountain sequence 
 # Input: nums = [1,2,6,4,5,2]
