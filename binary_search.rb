@@ -126,3 +126,52 @@ end
 
 puts find_peak([1, 2, 1, 3, 4, 5, 7, 6])
 
+
+# Given an array of integers nums sorted in ascending order, find the starting and ending position of a given target value.
+# Your algorithm's runtime complexity must be in the order of O(log n).
+# If the target is not found in the array, return [-1, -1].
+
+# Example 1:
+# Input: nums = [5,7,7,8,8,10], target = 8
+# Output: [3,4]
+
+# Example 2:
+# Input: nums = [5,7,7,8,8,10], target = 6
+# Output: [-1,-1]
+
+def search_range(nums, target)
+    return [-1, -1] if nums.empty?
+
+    start_pos = first_pos(nums, target)
+    last_pos = first_pos(nums, target + 1) - 1
+
+    if (start_pos == nums.size || nums[start_pos] != target)
+        return [-1, -1]
+    else
+        return [start_pos, [start_pos, last_pos].max]
+    end
+end
+
+#return the start position of element in an array that's large or equal to target
+def first_pos(nums, target)
+    start_ind = 0
+    last_ind = nums.size #will return the size if not found such element
+
+    while start_ind + 1 < last_ind do
+        mid = start_ind + (last_ind - start_ind) / 2
+        if nums[mid] < target
+            start_ind = mid
+        else
+            last_ind = mid
+        end
+    end
+
+    if nums[start_ind] >= target
+        return start_ind
+    end
+
+    return last_ind
+end
+
+print search_range([5,7,7,8,8,10], 8)
+print search_range([2, 2], 2)
