@@ -55,7 +55,7 @@ def find_target(nums, target)
             return mid
         end
 
-        if nums[start_ind] < nums[mid]
+        if nums[start_ind] < nums[mid
             if nums[start_ind] <= target && target <= nums[mid]
                 last_ind = mid
             else
