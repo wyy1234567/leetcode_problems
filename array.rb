@@ -84,3 +84,26 @@ def max_sub_array(nums)
     end
     max
 end
+
+
+# Given a non-empty array of digits representing a non-negative integer, increment one to the integer.
+# The digits are stored such that the most significant digit is at the head of the list, and each element in the array contains a single digit.
+# You may assume the integer does not contain any leading zero, except the number 0 itself.
+
+# Input: digits = [4,3,2,1]
+# Output: [4,3,2,2]
+# Explanation: The array represents the integer 4321.
+
+def plus_one(digits)
+    num = 0
+    digits.each_with_index do |digit, index|
+        num = num * 10 + digit
+    end
+    num += 1
+    ans = []
+    while num > 0 do 
+        ans.unshift(num % 10)
+        num = num / 10
+    end
+    ans
+end
