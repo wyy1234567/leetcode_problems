@@ -107,3 +107,31 @@ def plus_one(digits)
     end
     ans
 end
+
+# Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
+# Example:
+# Input: 5
+# Output:
+# [
+#      [1],
+#     [1,1],
+#    [1,2,1],
+#   [1,3,3,1],
+#  [1,4,6,4,1]
+# ]
+
+def generate(num_rows)
+    ans = [[1], [1, 1]]
+    return [] if num_rows == 0
+    return [[1]] if num_rows == 1
+    return ans if num_rows == 2
+    
+    for i in 3..num_rows do 
+        curr_arr = [1] * i
+        for j in 1..i - 2 do
+            curr_arr[j] = ans[i - 2][j - 1] + ans[i - 2][j]
+        end
+        ans << curr_arr
+    end
+    ans
+end
