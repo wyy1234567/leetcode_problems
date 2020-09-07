@@ -160,3 +160,23 @@ def max_profit(prices)
     end
     max_pro
 end
+
+# Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+# You may assume that the array is non-empty and the majority element always exist in the array.
+
+# Example 1:
+# Input: [3,2,3]
+# Output: 3
+
+#Boyer-Moore Voting Algorithm
+def majority_element(nums)
+    count = 0 
+    ans = 0
+    nums.each do |num|
+        if count == 0
+            ans = num
+        end
+        count += ans == num ? 1 : -1
+    end
+    ans
+end
