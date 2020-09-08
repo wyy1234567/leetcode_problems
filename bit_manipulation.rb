@@ -14,3 +14,23 @@ def single_number(nums)
     end
     a
 end
+
+# Given an integer n, return the number of trailing zeroes in n!.
+
+# Example 1:
+# Input: 3
+# Output: 0
+# Explanation: 3! = 6, no trailing zero.
+
+# Example 2:
+# Input: 5
+# Output: 1
+# Explanation: 5! = 120, 1 trailing zero.
+
+def trailing_zeroes(n)
+    if n == 0
+        return 0
+    else
+        return (n / 5 + trailing_zeroes(n / 5))
+    end
+end
