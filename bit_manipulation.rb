@@ -1,3 +1,7 @@
+# x ^ 0s = x      x & 0s = 0      x | 0s = x
+# x ^ 1s = ~x     x & 1s = x      x | 1s = 1s
+# x ^ x = 0       x & x = x       x | x = x
+
 # Given a non-empty array of integers, every element appears twice except for one. Find that single one.
 # Note:
 # Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
