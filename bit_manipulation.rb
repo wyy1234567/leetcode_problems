@@ -105,3 +105,23 @@ def trailing_zeroes(n)
         return (n / 5 + trailing_zeroes(n / 5))
     end
 end
+
+# Given an integer (signed 32 bits), write a function to check whether it is a power of 4.
+
+# Example 1:
+# Input: 16
+# Output: true
+
+# Example 2:
+# Input: 5
+# Output: false
+# Follow up: Could you solve it without loops/recursion?
+
+def is_power_of_four(num)
+    s = num.to_s(2)
+    zero_count = s[1..s.size - 1].count('0')
+    if s[0] == '1' && zero_count == s.size - 1 && zero_count % 2 == 0
+        return true
+    end
+    return false
+end
