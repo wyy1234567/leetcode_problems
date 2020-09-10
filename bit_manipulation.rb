@@ -125,3 +125,18 @@ def is_power_of_four(num)
     end
     return false
 end
+
+
+# Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
+
+# Example 1:
+# Input: [3,0,1]
+# Output: 2
+
+def missing_number(nums)
+    missing = nums.size
+    nums.each_with_index do |num, index|
+        missing ^= index ^ num
+    end
+    missing
+end
