@@ -277,3 +277,30 @@ def next_greater_element(nums1, nums2)
     end
     ans
 end
+
+# # Given scores of N athletes, find their relative ranks and the people with the top three highest scores, who will be awarded medals: "Gold Medal", "Silver Medal" and "Bronze Medal".
+# Input: [5, 4, 3, 2, 1]
+# Output: ["Gold Medal", "Silver Medal", "Bronze Medal", "4", "5"]
+
+def find_relative_ranks(nums)
+    hash = {}
+    nums.each_with_index do |num, index|
+        hash[num] = index
+    end
+    hash = hash.sort.to_h
+    print hash
+    count = 0
+    hash.each do |k, v|
+        if count == nums.size - 3
+            nums[v] = "Bronze Medal"
+        elsif count == nums.size - 2
+            nums[v] = "Silver Medal"
+        elsif count == nums.size - 1
+            nums[v] = "Gold Medal"
+        else
+            nums[v] = (nums.size - count).to_s
+        end
+        count += 1
+    end
+    nums
+end
