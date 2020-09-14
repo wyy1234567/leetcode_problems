@@ -234,3 +234,46 @@ def repeated_substring_pattern(s)
     return false if !s
     (s + s)[1...-1].include?(s)
 end
+
+# Given positions of houses and heaters on a horizontal line, find out minimum radius of heaters so that all houses could be covered by those heaters.
+# Input: [1,2,3],[2]
+# Output: 1
+# Explanation: The only heater was placed in the position 2, and if we use the radius 1 standard, then all the houses can be warmed.
+
+def find_radius(houses, heaters)
+    houses = houses.sort
+    heaters = heaters.sort
+    res = 0
+    i = 0
+    houses.each do |h|
+        while i < heaters.size - 1 && heaters[i] + heaters[i + 1] <= h * 2 do 
+            i += 1
+        end
+        res = [res, (heaters[i] - h).abs].max 
+    end
+    res
+end
+
+# You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements are subset of nums2. Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
+# Input: nums1 = [4,1,2], nums2 = [1,3,4,2].
+# Output: [-1,3,-1]
+def next_greater_element(nums1, nums2)
+    hash = {}
+    stack = []
+    nums2.each do |num|
+        while !stack.empty? && num > stack.last do 
+            hash[stack.pop] = num
+        end
+        stack << num
+    end
+    
+    ans = []
+    nums1.each do |num|
+        if hash[num]
+            ans << hash[num]
+        else
+            ans << -1
+        end
+    end
+    ans
+end
