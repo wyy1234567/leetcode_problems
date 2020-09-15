@@ -334,3 +334,22 @@ def find_pairs(nums, k)
     end
     count
 end
+
+# Given a flowerbed (represented as an array containing 0 and 1, where 0 means empty and 1 means not empty), and a number n, return if n new flowers can be planted in it without violating the no-adjacent-flowers rule.
+# Example 1:
+# Input: flowerbed = [1,0,0,0,1], n = 1
+# Output: True
+
+def can_place_flowers(flowerbed, n)
+    i = 0
+    while i < flowerbed.size do 
+        if (flowerbed[i] == 0 && (i == 0 || flowerbed[i - 1] == 0) && (i == flowerbed.size - 1 || flowerbed[i + 1] == 0))
+            flowerbed[i] = 1
+            n -= 1
+        end
+        
+        i += 1
+    end
+    
+    n <= 0
+end
