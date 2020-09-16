@@ -370,3 +370,29 @@ def pivot_index(nums)
     end
     return -1
 end
+
+# A self-dividing number is a number that is divisible by every digit it contains.For example, 128 is a self-dividing number because 128 % 1 == 0, 128 % 2 == 0, and 128 % 8 == 0.
+# Input: left = 1, right = 22
+# Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22]
+
+def self_dividing_numbers(left, right)
+    ans = []
+    for i in left..right do 
+        if is_self_divided(i)
+            ans << i
+        end
+    end
+    ans
+end
+
+def is_self_divided(num)
+    n = num
+    while n > 0 do 
+        curr = n % 10
+        if curr == 0 || num % curr != 0
+            return false
+        end
+        n /= 10
+    end
+    return true
+end
