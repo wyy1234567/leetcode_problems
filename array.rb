@@ -353,3 +353,20 @@ def can_place_flowers(flowerbed, n)
     
     n <= 0
 end
+
+# Given an array of integers nums, write a method that returns the "pivot" index of this array.
+# We define the pivot index as the index where the sum of all the numbers to the left of the index is equal to the sum of all the numbers to the right of the index.
+# Input: nums = [1,7,3,6,5,6]
+# Output: 3
+
+def pivot_index(nums)
+    sum = nums.sum
+    left_sum = 0
+    nums.each_with_index do |num, i|
+        if left_sum == sum - left_sum - num
+            return i
+        end
+        left_sum += num
+    end
+    return -1
+end
