@@ -79,3 +79,32 @@ def mark_island(grid, x, y, n, m)
         end
     end
 end
+
+# You are given row x col grid representing a map where grid[i][j] = 1 represents land and grid[i][j] = 0 represents water.
+# Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected land cells).
+# Input: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
+# Output: 16
+
+def island_perimeter(grid)
+    return 0 if !grid || grid.empty? || grid[0].size = 0
+    count = 0
+    neighbors = 0
+    n = grid.size
+    m = grid[0].size
+    for i in 0...n do 
+        for j in 0...m do 
+            if grid[i][j] == 1
+                count += 1
+            end
+
+            if i + 1 < n && grid[i + 1][j] == 1
+                neighbors += 1
+            end
+
+            if j + 1 < m && grid[i][j + 1] == 1
+                neighbors += 1
+            end
+        end
+    end
+    count * 4 - neighbors * 2
+end
