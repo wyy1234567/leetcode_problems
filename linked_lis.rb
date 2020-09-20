@@ -60,3 +60,54 @@ def reverse(prev, curr, k)
         curr = temp
     end
 end
+
+
+# A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+# Return a deep copy of the list.
+
+# Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+# Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+
+class Node
+    attr_accessor :val, :next, :random
+    def initialize(val = 0)
+        @val = val
+		  @next = nil
+		  @random = nil
+    end
+
+    def copyRandomList(head)
+        return nil if !head
+        dummy = Node.new(0)
+        dummy.next = head
+        curr = head
+    
+        while curr do 
+            new_node = Node.new(curr.val)
+            new_node.next = curr.next
+            curr.next = new_node
+            curr = curr.next.next
+        end
+        curr = head
+    
+        while curr do 
+            curr.next.random = curr.random.next if curr.random
+            curr = curr.next.next
+        end
+    
+        prev = dummy
+        curr = head
+        
+        while curr do 
+            copy = curr.next
+            curr.next = copy.next
+            prev.next = copy
+            prev = copy
+            curr = curr.next
+        end
+    
+        dummy.next
+    end
+    
+end
+
