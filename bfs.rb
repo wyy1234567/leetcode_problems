@@ -108,3 +108,33 @@ def island_perimeter(grid)
     end
     count * 4 - neighbors * 2
 end
+
+# Given a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+# Example:
+# Input: [1,2,3,null,5,null,4]
+# Output: [1, 3, 4]
+# Explanation:
+
+#    1            <---
+#  /   \
+# 2     3         <---
+#  \     \
+#   5     4       <---
+
+def right_side_view(root)
+    return [] if !root
+    queue = [root]
+    ans = []
+    while !queue.empty? do 
+        size = queue.size
+        for i in 0...size do 
+            curr = queue.shift
+            queue << curr.left if curr.left
+            queue << curr.right if curr.right
+            if i == size - 1
+                ans << curr.val 
+            end
+        end
+    end
+    ans
+end
