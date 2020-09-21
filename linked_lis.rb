@@ -108,6 +108,70 @@ class Node
     
         dummy.next
     end
-    
 end
+
+# Given the head of a linked list, return the list after sorting it in ascending order.
+# Follow up: Can you sort the linked list in O(n logn) time and O(1) memory (i.e. constant space)?
+# Input: head = [4,2,1,3]
+# Output: [1,2,3,4]
+
+class ListNode
+    attr_accessor :val, :next
+    def initialize(val = 0, _next = nil)
+        @val = val
+        @next = _next
+    end
+
+    def sort_list(head)
+        return head if !head || !head.next
+        fast = head
+        slow = head
+
+        while fast.next && fast.next.next do 
+            fast = fast.next.next
+            slow = slow.next
+        end
+
+        mid = slow.next
+        slow.next = nil
+        
+        left = sort_list(head)
+        right = sort_list(mid)
+        merge(left, right)
+    end
+
+    def merge(left, right)
+        return left if !right
+        return right if !left
+
+        if left.val < right.val 
+            head = left
+            left = left.next
+        else
+            head = right
+            right = right.next
+        end
+
+        curr = head
+
+        while left && right do 
+            if left.val < right.val 
+                curr.next = left
+                left = left.next
+                curr = curr.next
+            else
+                curr.next = right
+                right = right.next
+                curr = curr.next
+            end
+        end
+
+        curr.next = right if right
+        curr.next = left if left
+
+        head
+    end
+end
+
+
 
