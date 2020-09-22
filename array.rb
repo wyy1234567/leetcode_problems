@@ -434,3 +434,55 @@ def uniq_pairs(array, target)
     end
     count
 end
+
+
+# Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+# Notice that the solution set must not contain duplicate triplets.
+
+# Example 1:
+# Input: nums = [-1,0,1,2,-1,-4]
+# Output: [[-1,-1,2],[-1,0,1]]
+
+def three_sum(nums)
+    return [] if !nums || nums.size < 3
+    ans = []
+    i = 0 
+    size = nums.size
+    nums = nums.sort
+    while i < size do 
+        if nums[i] == nums[i - 1] && i > 0 
+            i += 1
+            next
+        end
+
+        a = nums[i]
+        target = -1 * a
+        two_sum(nums[(i + 1)...size], target, a, ans)
+        i += 1
+    end
+    ans
+end
+
+def two_sum(nums, target, curr, ans)
+    return [] if !nums || nums.size < 2
+    left = 0
+    right = nums.size - 1
+    while left < right do 
+        if nums[left] + nums[right] == target
+            ans << [curr, nums[left], nums[right]]
+            left += 1
+            right -= 1
+            while left < right && nums[left] == nums[left - 1]
+                left += 1
+            end
+
+            while left < right && nums[right] == nums[right + 1]
+                right -= 1
+            end
+        elsif nums[left] + nums[right] < target
+            left += 1
+        else
+            right -= 1
+        end
+    end
+end
