@@ -396,3 +396,41 @@ def is_self_divided(num)
     end
     return true
 end
+
+
+# Given an array of integers, find how many unique pairs in the array such that their sum is equal to a specific target number. Please return the number of pairs.
+# Input: nums = [1,1,2,45,46,46], target = 47 
+# Output: 2
+# Explanation:
+
+# 1 + 46 = 47
+# 2 + 45 = 47
+
+
+def uniq_pairs(array, target)
+    return 0 if array.size <= 1
+    array = array.sort
+    ans = 0
+    count = 0
+    left = 0
+    right = array.size - 1
+    while left < right do 
+        if array[left] + array[right] == target
+            count += 1
+            left += 1
+            right -= 1
+            while left < right && array[left] == array[left - 1]
+                left += 1
+            end
+
+            while left < right && array[right] == array[right + 1]
+                right -= 1
+            end
+        elsif array[left] + array[right] < target
+            left += 1
+        else
+            right -= 1
+        end
+    end
+    count
+end
