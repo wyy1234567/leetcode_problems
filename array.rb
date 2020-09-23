@@ -516,3 +516,28 @@ def triangle_number(nums)
     end
     ans
 end
+
+# Given an array of integers, find how many pairs in the array such that their sum isless than or equal toa specific target number. Please return the number of pairs.
+# Given nums =[2, 7, 11, 15], target =24.
+# Return5.
+# 2 + 7 < 24
+# 2 + 11 < 24
+# 2 + 15 < 24
+# 7 + 11 < 24
+
+def two_sum(nums, target)
+    return 0 if !nums || nums.size < 2
+    nums = nums.sort
+    count = 0
+    left = 0
+    right = nums.size - 1
+    while left < right do 
+        if nums[left] + nums[right] <= target
+            count += right - left
+            left += 1
+        else
+            right -= 1
+        end
+    end
+    count
+end
