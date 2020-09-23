@@ -541,3 +541,22 @@ def two_sum(nums, target)
     end
     count
 end
+
+
+#find two elements in an array, that has the minimum difference with target. return it
+def two_sum(nums, target)
+    return 0 if !nums || nums.size < 2
+    min = target
+    left = 0
+    right = nums.size - 1
+    while left < right do 
+        diff = (nums[left] + nums[right] - target).abs
+        min = [min, diff].min
+        if nums[left] + nums[right] < target
+            left += 1
+        else
+            right -= 1
+        end
+    end
+    min
+end
