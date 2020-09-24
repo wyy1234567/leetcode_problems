@@ -111,3 +111,26 @@ def climb_stairs(n)
     end
     arr.last
 end
+
+# Given an unsorted array of integers, find the length of longest increasing subsequence.
+# Example:
+# Input: [10,9,2,5,3,7,101,18]
+# Output: 4 
+# Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4. 
+
+def length_of_lis(nums)
+    return 0 if !nums
+    return 1 if nums.size == 1
+    arr = [0] * nums.size
+    max = 0
+    for i in 0...nums.size do 
+        arr[i] = 1
+        for j in 0...i do 
+            if nums[j] < nums[i]
+                arr[i] = arr[i] > arr[j] + 1 : arr[i] : arr[j] + 1 
+            end
+        end
+        max = [max, arr[i]].max
+    end
+    max
+end
