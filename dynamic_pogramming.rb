@@ -127,7 +127,7 @@ def length_of_lis(nums)
         arr[i] = 1
         for j in 0...i do 
             if nums[j] < nums[i]
-                arr[i] = arr[i] > arr[j] + 1 : arr[i] : arr[j] + 1 
+                arr[i] = arr[i] > arr[j] + 1 ? arr[i] : arr[j] + 1 
             end
         end
         max = [max, arr[i]].max
@@ -203,4 +203,43 @@ def largest_divisible_subset(nums)
         index = pre[index]
     end
     ans
+end
+
+
+# 91. Decode Ways
+# A message containing letters from A-Z is being encoded to numbers using the following mapping:
+# 'A' -> 1
+# 'B' -> 2
+# ...
+# 'Z' -> 26
+# Given a non-empty string containing only digits, determine the total number of ways to decode it.
+# Example 1:
+# Input: "12"
+# Output: 2
+# Explanation: It could be decoded as "AB" (1 2) or "L" (12).
+# Example 2:
+# Input: "226"
+# Output: 3
+# Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
+def num_decodings(s)
+    return 0 if !s || s == '0'
+    return 1 if s.size == 1
+    dp = [0] * (s.size + 1)
+    dp[0] = 1
+    dp[1] = s[0] == '0' ? 0 : 1
+
+    for i in 2..s.size do 
+        char = s[i - 1].to_i
+        chars = s[(i - 2)..(i - 1)].to_i
+
+        if char >= 1 && char <= 9
+            dp[i] += dp[i - 1]
+        end
+
+        if chars >= 10 && chars <= 26
+            dp[i] += dp[i - 2]
+        end
+    end
+
+    dp.last
 end
