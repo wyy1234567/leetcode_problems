@@ -37,3 +37,20 @@ def add_strings(num1, num2)
     end
     ans
 end
+
+# 1513. Number of Substrings With Only 1s
+# Given a binary string s (a string consisting only of '0' and '1's).Return the number of substrings with all characters 1's.Since the answer may be too large, return it modulo 10^9 + 7.
+
+def num_sub(s)
+    curr = 0
+    ans = 0
+    for i in 0...s.size do 
+        if s[i] == '1' 
+            curr += 1
+            ans += curr
+        else
+            curr = 0
+        end
+    end
+    ans % (10 ** 9 + 7)
+end
