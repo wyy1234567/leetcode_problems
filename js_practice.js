@@ -4,12 +4,21 @@ const square = (x) => {
     return (x * x) 
 }
 
-const cap = (string) => {
-    var splitStr = string.toLowerCase().split(' ');
-    for (var i = 0; i < splitStr.length; i++) {
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+// const cap = (string) => {
+//     var splitStr = string.toLowerCase().split(' ');
+//     for (var i = 0; i < splitStr.length; i++) {
+//         splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+//     }
+//     return splitStr.join(' ');
+// }
+
+var cap = (string) => {
+    var arr = string.split(' ')
+    for (var i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1);
     }
-    return splitStr.join(' ');
+
+    return arr.join(' ')
 }
 
 var numDecodings = function(s) {
@@ -23,8 +32,8 @@ var numDecodings = function(s) {
     dp[1] = s.charAt(0) === '0' ? 0 : 1
 
     for (var i = 2; i < dp.length; i++) {
-        var char = Number(s.slice(i - 1, i));
-        var chars = Number(s.slice(i - 2, i));
+        var char = parseInt(s.slice(i - 1, i));
+        var chars = parseInt(s.slice(i - 2, i));
 
         if (char >= 1 && char <= 9) {
             dp[i] += dp[i - 1]
@@ -37,6 +46,22 @@ var numDecodings = function(s) {
 
     return dp[dp.length - 1]
 }
+
+// var numDecodings = (s) => {
+//     if (!s || s.length == 0) {
+//         return 0
+//     }
+
+//     var dp = new Array(s.length + 1).fill(0)
+//     dp[0] = 1
+//     dp[1] = s.charAt(0) === '0' ? 0 : 1
+
+//     for (var i = 2; i < s.length; i++) {
+//         var char = parseInt(s.charAt(i - 1, i));
+//         var chars = parseInt(s.slice(i - 2, i));
+
+//     }
+// }
 
 var isHappy = function(n) {
     var hash = {}
