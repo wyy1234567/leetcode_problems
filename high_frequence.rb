@@ -143,3 +143,20 @@ def is_isomorphic(s, t)
 
     return true
 end
+
+# A rectangle is represented as a list [x1, y1, x2, y2], where (x1, y1) are the coordinates of its bottom-left corner, and (x2, y2) are the coordinates of its top-right corner.
+def is_rectangle_overlap(rec1, rec2)
+    #x direction
+    #if rec2 is in the left side of rec1 || rec2 is in the right side of rec1
+    if rec2[0] >= rec1[2] || rec2[2] <= rec1[0]
+        return false
+    end
+    
+    #y direction
+    #if rec2 is in the upper side of rec1 || rec2 is in the lower side of rec1
+    if rec2[1] >= rec1[3] || rec2[3] <= rec1[1]
+        return false
+    end
+    
+    return true
+end
