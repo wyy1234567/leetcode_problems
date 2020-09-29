@@ -38,10 +38,10 @@ def selection_sort(matrix)
     matrix  
 end
 
-# print selection_sort([[1,100],[11,22],[1,11],[2,12]])
+print selection_sort([[1,100],[11,22],[1,11],[2,12]])
 
-#merge sort
-#sort the array in two halfs, then merge them together
+# merge sort
+# sort the array in two halfs, then merge them together
 def merge_sort(array)
     return array if array.size <= 1
     mid = (array.size / 2).floor
@@ -59,7 +59,6 @@ def merge(left, right)
         [right[0]] + merge(left, right[1..right.length])
     end
 end
-
 
 #insertion sort
 #gradually find & remove the minimum element in the given array, then push it to a new arr
