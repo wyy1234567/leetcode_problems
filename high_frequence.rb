@@ -91,3 +91,55 @@ end
 # Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*'.
 # '?' Matches any single character.
 # '*' Matches any sequence of characters (including the empty sequence).
+def is_match(s, ps)
+    return false if !s || !ps
+    column = [false] * (ps.size + 1)
+    dp = []
+    (s.size + 1).times do 
+        dp << Array.new(column)
+    end
+
+    dp[0][0] = true
+
+    for i in 1..ps.size do 
+        if ps[i-1] == '*'
+            dp[0][i] = dp[0][i-1]
+        end
+    end
+
+    for i in 1..s.size do 
+        for j in 1..ps.size do 
+            if ps[j-1] == s[i-1] || ps[j-1] == '?'
+                dp[i][j] = dp[i-1][j-1]
+            elsif ps[j-1] == '*'
+                dp[i][j] = dp[i-1][j] || dp[i][j-1]
+            end
+        end
+    end
+
+    dp[s.size][ps.size]
+end
+
+# Given two strings s and t, determine if they are isomorphic.
+# Two strings are isomorphic if the characters in s can be replaced to get t.
+def is_isomorphic(s, t)
+    return false if !s || !t || s.size != t.size
+    hash1 = {}
+    hash2 = {}
+    
+    for i in 0...s.size do 
+        if !hash1[s[i]]
+            hash1[s[i]] = t[i]
+        else
+            return false if hash1[s[i]] != t[i]
+        end
+        
+        if !hash2[t[i]]
+            hash2[t[i]] = s[i]
+        else
+            return false if hash2[t[i]] != s[i]
+        end
+    end
+
+    return true
+end
