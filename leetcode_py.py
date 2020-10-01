@@ -28,5 +28,18 @@ def winSum(nums, K):
     
     return res
 
+def longestPalindrome(s):
+    ss = set()
+
+    for char in s: 
+        if char in ss: 
+            ss.remove(char)
+        else:
+            ss.add(char)
+    
+    if len(ss) == 0:
+        return len(s)
+    else: 
+        return len(s) - len(ss) + 1
 
 
