@@ -42,4 +42,37 @@ def longestPalindrome(s):
     else: 
         return len(s) - len(ss) + 1
 
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+    
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        if not head:
+            return None
+        
+        curr = head
+        while curr: 
+            new_node = Node(curr.val)
+            next_node = curr.next
+            curr.next = new_node
+            new_node.next = next_node
+            curr = next_node
+        
+        curr = head
+        while curr:
+            if not curr.random:
+                curr.next.random = None
+            else: 
+                curr.next.random = curr.random.next
+            
+            curr = curr.next.next
+        
+        curr = head.next
+        while curr: 
+            curr.next = curr.next.next
+            curr = curr.next
+
+        return head.next
 
