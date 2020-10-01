@@ -103,3 +103,27 @@ def highFive(slist):
         avg = math.floor(sum(shash[k]) / len(shash[k]))
         res.append([k, avg])
     return res
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+    
+    def findSubtree(self, root):
+        self.max_sum = float('-inf')
+        self.max_node = None
+
+        def nodeSum(root): 
+            if not root:
+                return 0
+            
+            left_sum = nodeSum(root.left)
+            right_sum = nodeSum(root.right)
+            curr = root.val + left_sum + right_sum
+            if curr > self.max_sum:
+                self.max_sum = curr
+                self.max_node = root
+            return curr
+        
+        nodeSum(root)
+        return self.max_node
