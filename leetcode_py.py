@@ -10,4 +10,23 @@ def kClosest(points, K):
             heapq.heappush(heap, (dis, x, y))
     return [(x, y) for (dis, x, y) in heap]
 
+def winSum(nums, K):
+    if not nums or K == 0: 
+        return []
+    
+    initial_sum = 0
+    for i in range(K):
+        initial_sum += nums[i]
+    
+    start, last = 0, K
+    res = [initial_sum]
+    while last < len(nums): 
+        initial_sum = initial_sum + nums[last] - nums[start]
+        res.append(initial_sum)
+        last += 1
+        start += 1
+    
+    return res
+
+
 
