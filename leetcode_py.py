@@ -127,3 +127,27 @@ class TreeNode:
         
         nodeSum(root)
         return self.max_node
+
+def validWordAbbreviation(self, word, abbr):
+        if not word or not abbr or abbr[0] == '0':
+            return False
+        
+        i, j = 0, 0
+        while i < len(word) and j < len(abbr):
+            if abbr[j].isdigit():
+                num = 0
+                while j < len(abbr) and abbr[j].isdigit():
+                    num = num * 10 + (ord(abbr[j]) - ord('0'))
+                    j += 1 
+                i += num 
+            else:
+                if abbr[j] == word[i]:
+                    i += 1 
+                    j += 1 
+                else:
+                    return False 
+            
+        if i == len(word) and j == len(abbr):
+            return True
+        else: 
+            return False
