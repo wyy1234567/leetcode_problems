@@ -151,3 +151,36 @@ def validWordAbbreviation(self, word, abbr):
             return True
         else: 
             return False
+
+class Solution:
+    """
+    @param: nums: a sorted integer array
+    @param: lower: An integer
+    @param: upper: An integer
+    @return: a list of its missing ranges
+    """
+    def findMissingRanges(self, nums, lower, upper):
+        # write your code here
+        self.ans = []
+        
+        def addRange(low, high):
+            if low > high:
+                return
+            if low == high:
+                self.ans.append(str(low))
+                return 
+            string = str(low) + '->' + str(high)
+            self.ans.append(string)
+            
+        if len(nums) == 0:
+            addRange(lower, upper)
+            return self.ans
+        
+        addRange(lower, nums[0] - 1)
+        for i in range(1, len(nums)):
+            addRange(nums[i - 1] + 1, nums[i] - 1)
+        
+        addRange(nums[len(nums) - 1] + 1, upper)
+        return self.ans 
+
+    
