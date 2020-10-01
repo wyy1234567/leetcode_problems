@@ -184,3 +184,40 @@ class Solution:
         return self.ans 
 
     
+#valid num: 符号+浮点数+e+符号+整数，前后可以有空格
+def isNumber(self, s: str) -> bool:
+    i = 0
+    s = s.strip() + ' '
+    size = len(s) - 1
+
+    if s[i] == '+' or s[i] == '-':
+        i += 1
+    
+    point, num = 0, 0
+
+    while s[i].isdigit() or s[i] == '.':
+        if s[i].isdigit():
+            num += 1
+        if s[i] == '.':
+            point += 1
+        i += 1
+
+    if point > 1 or num < 1:
+        return False
+    
+    if s[i] == 'e':
+        i += 1
+        if s[i] == '+' or s[i] == '-':
+            i += 1
+        
+        if i == size:
+            return False 
+        
+        while i < size:
+            if not s[i].isdigit():
+                return False
+            i += 1
+    
+    return i == size
+
+
