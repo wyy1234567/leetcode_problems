@@ -220,4 +220,40 @@ def isNumber(self, s: str) -> bool:
     
     return i == size
 
+def coinChange(coins, amount):
+    coins.sort()
+    dp = [amount + 1] * (amount + 1)
+    dp[0] = 0
+
+    for i in range(1, len(dp)):
+        for num in coins:
+            if num <= i:
+                dp[i] = min(dp[i], dp[i - num] + 1)
+    
+    if dp[amount] > amount:
+        return -1
+    else:
+        return dp[amount]
+
+def dfs(board, i, j, word):
+    if len(word) == 0:
+        return True
+    
+    if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or board[i][j] != word[0]:
+        return False
+    
+    temp = board[i][j]
+    board[i][j] = '#'
+    res = dfs(board, i+1, j, word[1:]) or dfs(board, i-1, j, word[1:]) or dfs(board, i, j + 1, word[1:]) or dfs(board, i, j-1, word[1:])
+    board[i][j] = temp
+    return res    
+
+def exist(board, word) -> bool:
+    if not board:
+        return False
+    
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            return dfs(board, i, j, word)
+     
 
