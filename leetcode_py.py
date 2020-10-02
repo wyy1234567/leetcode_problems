@@ -256,4 +256,40 @@ def exist(board, word) -> bool:
         for j in range(len(board[0])):
             return dfs(board, i, j, word)
      
+def submerge(grid, i, j, m, n):
+    x = [0, 1, -1, 0]
+    y = [1, 0, 0 -1]
+    queue = []
+    queue.append([i, j])
+    grid[i][j] = '0'
 
+    while len(grid) > 0:
+        curr = queue.pop(0)
+        curr_x = curr[0]
+        curr_y = curr[1]
+
+        for i in range(4):
+            adj_x = curr_x + x[i]
+            adj_y = curr_y + y[i]
+
+            if adj_x < 0 or adj_x > m or adj_y < 0 or adj_y > n:
+                continue
+
+            if grid[adj_x][adj_y] == '1':
+                grid[adj_x][adj_y] = '0'
+                queue.append([adj_x, adj_y])
+
+def numIsland(grid):
+    if not grid or len(grid) == 0 or len(grid[0]) == 0:
+        return 0
+    
+    m = len(grid)
+    n = len(grid[0])
+    ans = 0
+
+    for i in range(m):
+        for j in range(n):
+            if grid[i][j] == '1':
+                ans += 1
+                submerge(grid, i, j, m, n)
+    return ans
