@@ -293,3 +293,28 @@ def numIsland(grid):
                 ans += 1
                 submerge(grid, i, j, m, n)
     return ans
+
+def letterCombinations(digits):
+    if not digits:
+        return []
+
+    phone = {'2': ['a', 'b', 'c'],
+             '3': ['d', 'e', 'f'],
+             '4': ['g', 'h', 'i'],
+             '5': ['j', 'k', 'l'],
+             '6': ['m', 'n', 'o'],
+             '7': ['p', 'q', 'r', 's'],
+             '8': ['t', 'u', 'v'],
+             '9': ['w', 'x', 'y', 'z']}
+    
+    ans = []
+
+    def backtrack(res, words):
+        if len(words) == 0:
+            ans.append(res)
+        else:
+            for letter in phone[words[0]]:
+                backtrack(res+letter, words[1:])
+    
+    backtrack('', digits)
+    return ans
