@@ -393,3 +393,14 @@ def maxSubstr(s):
         findStr(s, i, i + 1)
     
     return ans
+
+def maxSublist(nums):
+    dp = [float('-inf')] * (len(nums) + 1)
+    dp[0] = 0
+    ans = float('-inf')
+    for i in range(1, len(dp)):
+        dp[i] = max(nums[i - 1], dp[i - 1] + nums[i - 1])
+        if dp[i] > ans:
+            ans = dp[i]
+    
+    return ans
