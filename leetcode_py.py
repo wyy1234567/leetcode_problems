@@ -372,3 +372,24 @@ def spiralOrder(matrix):
             c = c + x[d]
     
     return ans
+
+
+def maxSubstr(s): 
+    if len(s) < 2:
+        return s 
+    
+    ans = ''
+
+    def findStr(s, left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            subString = s[left:right+1]
+            if len(subString) > len(ans):
+                ans = subString 
+            left -= 1
+            right += 1
+    
+    for i in range(len(s)):
+        findStr(s, i, i)
+        findStr(s, i, i + 1)
+    
+    return ans
