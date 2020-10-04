@@ -404,3 +404,33 @@ def maxSublist(nums):
             ans = dp[i]
     
     return ans
+
+def shortestPath(grid):   
+    m = len(grid)
+    n = len(grid[0])
+
+    if grid[0][0] == 0 or grid[m-1][n-1] == 0:
+        return -1
+    
+    helper = [[float('inf')*n for _ in range(m)]]
+    helper[0][0] = 1
+
+    queue = [[0,0]]
+    x = [-1,1,0,0,-1,1,-1,1]
+    y = [0,0,1,-1,1,1,-1,-1]
+    while len(queue) > 0:
+        curr = queue.pop(0)
+        cx = curr[0]
+        cy = curr[1]
+        for i in range(8):
+            adj_x = cx + x[i]
+            adj_y = cy + y[i]
+
+            if adj_x >= 0 and adj_x < n and adj_y >= 0 and adj_y < m and grid[adj_x][adj_y] == 0 and helper[adj_x][adj_y] > helper[cx][cy] + 1:
+                helper[adj_x][adj_y] = min(helper[adj_x][adj_y], helper[cx][cy] + 1)
+                queue.append([adj_x, adj_y])
+    
+    if helper[m-1][n-1] == float('inf'):
+        return -1
+    else:
+        return helper[m-1][n-1]
