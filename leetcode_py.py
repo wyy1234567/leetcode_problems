@@ -345,3 +345,30 @@ def nextPermutation(nums):
     nums[pointer] = nums[index]
     nums[index] = temp
     nums[(pointer + 1):] = sorted(nums[(pointer + 1):])
+
+def spiralOrder(matrix):
+    if not matrix:
+        return []
+    rows = len(matrix)
+    columns = len(matrix[0])
+    copy = [[False] * columns for _ in range(rows)]
+    ans = []
+    r, c, d = 0, 0, 0
+    x = [1, 0, -1, 0]
+    y = [0, 1, 0, -1]
+
+    for _ in range(rows * columns):
+        ans.append(matrix[r][c])
+        copy[r][c] = True
+        nc = c + x[d]
+        nr = r + y[d]
+
+        if 0<= nc < columns and 0 <= nr < rows and not copy[nr][nc]:
+            r = nr 
+            c = nc
+        else:
+            d = (d + 1) % 4
+            r = r + y[d]
+            c = c + x[d]
+    
+    return ans
