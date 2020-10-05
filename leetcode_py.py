@@ -495,3 +495,16 @@ def decode(string):
         else:
             item += string[i]
     return ans
+
+#return the longest file path length
+def filePath(string):
+    ans = 0
+    levelHash = {0:0}
+    for line in string.split('\n'):
+        name = line.lsplit('\t') #leading split string
+        level = len(line) - len(name)
+        if '.' in name:
+            ans = max(ans, levelHash[level] + len(name))
+        else:
+            levelHash[level + 1] = levelHash[level] + len(name) + 1
+    return ans
