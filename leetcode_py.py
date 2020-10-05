@@ -434,3 +434,32 @@ def shortestPath(grid):
         return -1
     else:
         return helper[m-1][n-1]
+
+
+from collections import OrderedDict 
+class LRUCache:
+    
+    def __init__(self, capacity):
+        self.od = OrderedDict()
+        self.capacity = capacity
+    
+    def get(self, key):
+        if key in self.od:
+            val = self.od[key]
+            del self.od[key]
+            self.od[key] = val
+            return val
+        else:
+            return -1 
+    
+    def put(self, key, value):
+        if key in self.od:
+            del self.od[key]
+            self.od[key] = value 
+        else:
+            if len(self.od) < self.capacity:
+                self.od[key] = value
+            else:
+                firstKey = next(iter(self.od.keys()))
+                del self.od[firstKey]
+                self.od[key] = value
