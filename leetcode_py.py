@@ -463,3 +463,35 @@ class LRUCache:
                 firstKey = next(iter(self.od.keys()))
                 del self.od[firstKey]
                 self.od[key] = value
+
+
+
+#words list: ['a','b',':','d'], find a way to encode it, return a string
+def encode(words):
+    ans = ''
+    for w in words:
+        for char in w:
+            if char == ':':
+                ans += '::'
+            else:
+                ans += char
+        ans += ':;'
+    return ans
+
+#give an encoded string, decode it into a list of words
+def decode(string):
+    ans = []
+    item = ''
+    i = 0
+    while i < len(string):
+        if string[i] == ':':
+            if string[i + 1] == ';':
+                ans.append(item)
+                item = ''
+                i += 2
+            else:
+                item += string[i]
+                i += 2            
+        else:
+            item += string[i]
+    return ans
