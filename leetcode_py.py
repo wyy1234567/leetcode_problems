@@ -509,9 +509,6 @@ def filePath(string):
             levelHash[level + 1] = levelHash[level] + len(name) + 1
     return ans
 
-class Reader:
-    def read4(self, buffer):
-        return 
 
 
 class ReadFile:
@@ -524,7 +521,7 @@ class ReadFile:
         while i < n:
             if self.head == self.tail:
                 self.head = 0
-                self.tail = Reader.read4(self.buffer)
+                # self.tail = Reader.read4(self.buffer) #api calls here
                 if self.tail == 0:
                     break
             while i < n and self.head < self.tail:
