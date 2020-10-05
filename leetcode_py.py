@@ -508,3 +508,28 @@ def filePath(string):
         else:
             levelHash[level + 1] = levelHash[level] + len(name) + 1
     return ans
+
+class Reader:
+    def read4(self, buffer):
+        return 
+
+
+class ReadFile:
+    def __init__(self):
+        self.buffer = [None] * 4
+        self.head, self.tail = 0, 0
+    
+    def read(self, buf, n):
+        i = 0
+        while i < n:
+            if self.head == self.tail:
+                self.head = 0
+                self.tail = Reader.read4(self.buffer)
+                if self.tail == 0:
+                    break
+            while i < n and self.head < self.tail:
+                buf[i] = self.buffer[self.head]
+                i += 1
+                self.head += 1
+        return i
+        
