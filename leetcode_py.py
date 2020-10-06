@@ -579,3 +579,21 @@ def mergeIntervals(intervals):
         else:
             ans[-1][1] = max(ans[-1][1], i[1])
     return ans
+
+
+def insertInterval(intervals, newInterval):
+    left = newInterval[0]
+    right = newInterval[1]
+    small = []
+    large = []
+
+    for i in intervals:
+        if i[1] < left:
+            small.append(i)
+        elif i[0] > right:
+            large.append(i)
+        else:
+            left = min(left, i[0])
+            right = max(right, i[1])
+    
+    return small + [[left, right]] + large
