@@ -597,3 +597,40 @@ def insertInterval(intervals, newInterval):
             right = max(right, i[1])
     
     return small + [[left, right]] + large
+
+def shortenWord(s, prefix):
+    if p >= len(s) - 2:
+        return s 
+    ans = ''
+    ans = s[0:prefix] + str(len(s) - 1 - prefix) + s[len(s)-1:]
+    return ans
+
+def wordAbbreviation(words):
+    count = {}
+    size = len(words)
+    prefix = [0] * size 
+    ans = [''] * size
+
+    for i in range(size):
+        prefix[i] = 1
+        ans[i] = shortenWord(words[i], 1)
+        if ans[i] not in count:
+            count[ans[i]] = 1
+        else:
+            count[ans[i]] += 1
+    
+    while True:
+        allUnique = True
+        for i in range(size):
+            if count[ans[i]] > 1:
+                prefix[i] += 1
+                ans[i] = shortenWord(words[i], prefix[i])
+                if ans[i] not in count:
+                    count[ans[i]] = 1
+                else:
+                    count[ans[i]] += 1
+                allUnique = False
+        if allUnique:
+            break
+    
+    return ans
