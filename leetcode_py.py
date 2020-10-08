@@ -599,7 +599,7 @@ def insertInterval(intervals, newInterval):
     return small + [[left, right]] + large
 
 def shortenWord(s, prefix):
-    if p >= len(s) - 2:
+    if prefix >= len(s) - 2:
         return s 
     ans = ''
     ans = s[0:prefix] + str(len(s) - 1 - prefix) + s[len(s)-1:]
@@ -634,3 +634,29 @@ def wordAbbreviation(words):
             break
     
     return ans
+
+
+import random
+class LoadBalance:
+    def __init__(self):
+        self.sset = set()
+
+    # @param {int} server_id add a new server to the cluster 
+    # @return nothing
+    def add(self, server_id):
+        self.sset.add(server_id)
+
+    # @param {int} server_id remove a bad server from the cluster
+    # @return nothing
+    def remove(self, server_id):
+        if server_id in self.sset:
+            self.sset.remove(server_id)
+        else:
+            return None
+
+    # @return {int} pick a server in the cluster randomly with equal probability
+    def pick(self):
+        if self.sset:
+            return random.sample(self.sset, 1)[0]
+        else:
+            return None
