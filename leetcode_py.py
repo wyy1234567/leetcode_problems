@@ -660,3 +660,21 @@ class LoadBalance:
             return random.sample(self.sset, 1)[0]
         else:
             return None
+
+
+def longestSub(s):
+    start = 0
+    ans = 0
+    curr = 0
+    dic = {}
+
+    for i in range(len(s)):
+        if s[i] in dic and dic[s[i]] >= start:
+            ans = max(curr, ans)
+            curr = i - dic[s[i]]
+            start = dic[s[i]] + 1
+        else:
+            curr += 1
+        dic[s[i]] = i 
+
+    return max(ans, curr)
