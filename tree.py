@@ -1,6 +1,7 @@
-from collections import defaultdict, deque
+# from collections import defaultdict, deque
 
 def vertcalTraversal(root):
+    from collections import defaultdict, deque
     nhash = collections.defaultdict(list)
     queue = collections.deque()
 
