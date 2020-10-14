@@ -714,7 +714,7 @@ def findWord(s, wordDict):
         if word not in wordDict:
             continue
 
-        sub = findWord(s[i:], wordDict)
+        sub = findWord(s[i:], wordDict)   #if the word is in the dict, find the partitions of the remaining string
         for w in sub:
             partitions.append(word + ' ' + w)
     memo[s] = partitions
