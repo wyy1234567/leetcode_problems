@@ -1,4 +1,4 @@
-# from collections import defaultdict, deque
+from collections import defaultdict, deque
 
 def vertcalTraversal(root):
     from collections import defaultdict, deque
@@ -15,4 +15,6 @@ def vertcalTraversal(root):
             queue.append((node.right, index + 1))
 
     return [nhash[key] for key in sorted(nhash)]
+
+
 

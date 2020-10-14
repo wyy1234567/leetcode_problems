@@ -690,3 +690,32 @@ def wordBreak(s, wordDict):
                 dp[j + 1] = True
     
     return dp[-1]
+
+memo = {}
+def wordBreakII(s, wordDict):
+    return findWord(s, wordDict)
+
+#functions will return an array of possible combinations
+#meanwhile add {string:combination} to memo hash
+def findWord(s, wordDict):
+    if not s:
+        return []
+
+    if s in memo:
+        return memo[s]
+    
+    partitions = []
+
+    if s in wordDict:
+        partitions.append(s)
+
+    for i in range(1, len(s)):
+        word = s[:i]
+        if word not in wordDict:
+            continue
+
+        sub = findWord(s[i:], wordDict)
+        for w in sub:
+            partitions.append(word + ' ' + w)
+    memo[s] = partitions
+    return partitions
