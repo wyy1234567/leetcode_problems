@@ -754,7 +754,13 @@ def findFirstIndex(nums, target):
         return left 
     
     return right
-    
-def findRange(nums, target):
 
-    return []
+def findRange(nums, target):
+    if not nums:
+        return [-1, -1]
+    
+    left = findFirstIndex(nums, target)
+    right = findFirstIndex(nums, target + 1) - 1 
+    if left >= len(nums) or nums[left] != target:
+        return [-1, -1]
+    return [left, max(left, right)]
