@@ -737,3 +737,24 @@ def findPeak(nums):
     if nums[left] > nums[right]:
         return left
     return right
+
+def findFirstIndex(nums, target):
+
+    left = 0 
+    right = len(nums)
+
+    while left + 1 < right:
+        mid = left + (right - left) // 2
+        if nums[mid] < target:
+            left = mid 
+        else:
+            right = mid 
+    
+    if nums[left] >= target:
+        return left 
+    
+    return right
+    
+def findRange(nums, target):
+
+    return []
