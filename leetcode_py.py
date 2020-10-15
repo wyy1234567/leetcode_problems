@@ -764,3 +764,27 @@ def findRange(nums, target):
     if left >= len(nums) or nums[left] != target:
         return [-1, -1]
     return [left, max(left, right)]
+
+
+def closestNumber(nums, target):
+    
+    if not nums:
+        return -1 
+    
+    left = 0
+    right = len(nums) - 1 
+
+    while left + 1 < right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] == target:
+            return mid 
+        elif nums[mid] < target:
+            left = mid 
+        else:
+            right = mid 
+    
+    if abs(nums[left] - target) < abs(nums[right] - target):
+        return left
+    
+    return right
