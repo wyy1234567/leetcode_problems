@@ -836,6 +836,46 @@ def surroundedRegions(board):
             else:
                 board[i][j] = 'X'
 
+
+# the 2D grid is:
+# INF  -1  0  INF
+# INF INF INF  -1
+# INF  -1 INF  -1
+#   0  -1 INF INF
+# the answer is:
+#   3  -1   0   1
+#   2   2   1  -1
+#   1  -1   2  -1
+#   0  -1   3   4
+
+def nearestExit(room):
+    INF = 2147483647
+    if not room or not room[0]:
+        return 
+
+    m = len(room)
+    n = len(room[0])
+    queue = []
+    x_dir = [1,-1,0,0]
+    y_dir = [0,0,1,-1]
+
+    for i in range(m):
+        for j in range(n):
+            if room[i][j] == 0:
+                queue.append([i, j])
+    
+    while queue:
+        curr = queue.pop(0)
+        cx = curr[0]
+        cy = curr[1]
+
+        for i in range(4):
+            nx = cx + x_dir[i]
+            ny = cy + y_dir[i]
+
+            if nx >= 0 and nx < m and ny >= 0 and ny < n and room[nx][ny] == INF:
+                queue.append([nx, ny])
+                room[nx][ny] = room[cx][cy] + 1
         
 
     
