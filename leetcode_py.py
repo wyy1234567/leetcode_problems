@@ -788,3 +788,54 @@ def closestNumber(nums, target):
         return left
     
     return right
+
+#merge regions from edges
+def merge(board, i, j):
+    if board[i][j] == 'X':
+        return 
+    
+    m = len(board)
+    n = len(board[0])
+
+    queue = [[i, j]]
+    x_dir = [1,-1,0,0]
+    y_dir = [0,0,1,-1]
+    board[i][j] = 'W'
+    
+    while queue:
+        curr = queue.pop(0)
+        cx = curr[0]
+        cy = curr[1]
+        for i in range(4):
+            nx = cx + x_dir[i]
+            ny = cy + y_dir[i]
+
+            if nx >= 0 and nx < m and ny >= 0 and ny < n and board[nx][ny] == 'O':
+                queue.append([nx, ny])
+                board[nx][ny] = 'W'
+
+def surroundedRegions(board):
+    if not board or not board[0]:
+        return 
+    
+    m = len(board)
+    n = len(board[0])
+
+    for i in range(m):
+        merge(board, i, 0)
+        merge(board, i, n - 1)
+    
+    for i in range(n):
+        merge(board, 0, i)
+        merge(board, m - 1, i)
+
+    for i in range(m):
+        for j in range(n):
+            if board[i][j] == 'W':
+                board[i][j] = 'O'
+            else:
+                board[i][j] = 'X'
+
+        
+
+    
