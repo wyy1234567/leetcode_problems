@@ -919,3 +919,58 @@ def knightShortestPath(grid, source, destination):
         return -1 
     
     return record[destination[0]][destination[1]]
+
+# Given a 2D grid, each cell is either a wall 2, a zombie 1 or people 0 (the number zero, one, two).Zombies can turn the nearest people(up/down/left/right) into zombies every day, but can not through wall. How long will it take to turn all people into zombies? Return -1 if can not turn all people into zombies.
+# Input:
+# [[0,1,2,0,0],
+#  [1,0,0,2,1],
+#  [0,1,0,0,0]]
+# Output: 2
+def zombie(grid):
+    if not grid or not grid[0]:
+        return -1 
+    
+    m = len(grid)
+    n = len(grid[0])
+
+    x = [1,-1,0,0]
+    y = [0,0,-1,1]
+
+    record = [[float('inf') for _ in range(n)] for _ in range(m)]
+
+    queue = []
+    result = float('inf')
+    zombie = 0
+    wall = 0
+    human = 0
+
+    for i in range(m):
+        for j in range(n):
+            if grid[i][j] == 1:
+                queue.append([i, j])
+                zombie += 1
+                record[i][j] = 0
+            elif grid[i][j] == 2:
+                wall += 1
+                record[i][j] = -1 
+    
+    while queue:
+        curr = queue.pop(0)
+        cx = curr[0]
+        cy = curr[1]
+
+        for i in range(4):
+            nx = cx + x[i]
+            ny = cy + y[i]
+
+            if nx >= 0 and nx < m and ny >= 0 and ny < n and grid[nx][ny] == 0 and record[cx][cy] + 1 < record[nx][ny]:
+                human += 1
+                record[nx][ny] = record[cx][cy] + 1
+                queue.append([nx, ny])
+                result = max(result, record[nx][ny])
+    
+    if human + wall + zombie != m * n:
+        return -1 
+    else:
+        return result
+
