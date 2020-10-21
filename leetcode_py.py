@@ -879,3 +879,43 @@ def nearestExit(room):
         
 
     
+#grid is 2d matrix containing 0 or 1, 1 represents obstacle. source and destination are starting and end points. return the shortest
+#path for knight to travel from source to destination
+# [[0,0,0],
+#  [0,0,0],
+#  [0,0,0]]
+# source = [2, 0] destination = [2, 2] 
+# output: 2: [2,0]->[0,1]->[2,2]
+
+def knightShortestPath(grid, source, destination):
+    if not grid or not grid[0]:
+        return -1 
+    
+    m = len(grid)
+    n = len(grid[0])
+
+    record = [[float('inf') for _ in range(n)] for _ in range(m)]
+    record[source[0]][source[1]] = 0
+
+    x_dir = [1,1,-1,-1,2,2,-2,-2]
+    y_dir = [2,-2,2,-2,1,-1,1,-1]
+
+    queue = [source]
+
+    while queue:
+        curr = queue.pop(0)
+        cx = curr[0]
+        cy = curr[1]
+
+        for i in range(8):
+            nx = cx + x_dir[i]
+            ny = cy + y_dir[i]
+
+            if nx >= 0 and nx < m and ny >= 0 and ny < n and grid[nx][ny] == 0 and record[cx][cy] + 1 < record[nx][ny]:
+                queue.append([nx, ny])
+                record[nx][ny] = record[cx][cy] + 1
+
+    if record[destination[0]][destination[1]] == float('inf'):
+        return -1 
+    
+    return record[destination[0]][destination[1]]
