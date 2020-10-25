@@ -974,3 +974,15 @@ def zombie(grid):
     else:
         return result
 
+
+def longestSequence(nums):
+    result = float('-inf')
+    dp = [0] * (len(nums) + 1)
+    for i in range(1, len(dp)):
+        for j in range(0, i):
+            curr_max = 0
+            if nums[j] < nums[i]:
+                curr_max = max(curr_max, dp[j])
+        dp[i] = curr_max + 1 
+        result = max(result, dp[i])
+    return result
