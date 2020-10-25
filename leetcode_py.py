@@ -986,3 +986,20 @@ def longestSequence(nums):
         dp[i] = curr_max + 1 
         result = max(result, dp[i])
     return result
+
+def isValidBST(root: TreeNode) -> bool:
+        return checkNodes(root, float('-inf'), float('inf'))
+    
+def checkNodes(root, down, up):
+    if not root:
+        return True 
+    val = root.val
+    if val <= down or val >= up:
+        return False
+        
+    if not checkNodes(root.left, down, val):
+        return False
+    if not checkNodes(root.right, val, up):
+        return False
+        
+    return True
