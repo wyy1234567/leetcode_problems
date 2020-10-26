@@ -1003,3 +1003,23 @@ def checkNodes(root, down, up):
         return False
         
     return True
+
+
+def getFactors(n):
+
+    result = []
+
+    def dfs(n, factor, ans):
+        if len(ans):
+            ans.append(int(n))
+            result.append(ans[:])
+            ans.pop()
+        
+        for i in range(factor, math.floor(math.sqrt(n) + 1)):
+            if n % i == 0:
+                ans.append(i)
+                dfs(n / i, i, ans[:])
+                ans.pop()
+
+    dfs(n, 2, [])
+    return result
