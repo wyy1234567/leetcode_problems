@@ -1074,3 +1074,19 @@ def findCombination(nums, start, arr, target, result):
         if nums[i] > target:
             break
         findCombination(nums, i + 1, arr + [nums[i]], target - nums[i], result)
+
+def dailyTemperatures(T):
+    if not T:
+        return []
+    
+    result = [0] * len(T)
+    stack = []
+
+    for index, num in enumerate(T):
+        while stack and num > T[stack[-1]]:
+            ind = stack.pop()
+            result[ind] = num - ind
+        
+        stack.append(index)
+    
+    return result
