@@ -1052,3 +1052,25 @@ def countSubs(s, left, right, ans):
         ans += 1
         left -= 1
         right += 1
+
+def combinationSum2(candidates, target):
+    if not candidates or not target:
+        return []
+    
+    ans = []
+    candidates.sort()
+    findCombination(candidates, 0, [], target, ans)
+
+    return ans
+
+def findCombination(nums, start, arr, target, result):
+    if target <= 0:
+        result.append(arr)
+        return 
+    
+    for i in range(start, len(nums)):
+        if i > start and nums[i] == nums[i - 1]:
+            continue
+        if nums[i] > target:
+            break
+        findCombination(nums, i + 1, arr + [nums[i]], target - nums[i], result)
