@@ -1096,3 +1096,27 @@ def reachingPoints(sx, sy, tx, ty):
         tx, ty = tx % ty, ty % tx
     
     return sx == tx and sy <= ty and (ty - sy) % sx == 0 or sy == ty and sx <= tx and (tx - sx) % sy == 0
+
+def findCircleNum(M):
+    if not M or not M[0]:
+        return 0
+    
+    n = len(M)
+
+    seen = [False] * n
+    count = 0
+    for i in range(n):
+        if seen[i]:
+            continue
+        findFriends(M, i, n, seen)
+        count += 1
+    return count
+
+def findFriends(matrix, curr, n, seen):
+    if seen[curr]:
+        return 
+    
+    seen[curr] = True
+    for i in range(n):
+        if matrix[curr][i] == 1 and not seen[i]:
+            findFriends(matrix, i, n, seen)
