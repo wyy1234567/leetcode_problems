@@ -1035,3 +1035,20 @@ def painthouse(costs):
         matrix[i][2] = costs[i][0] + min(matrix[i-1][0], matrix[i-1][1])
 
     return min(matrix[n-1][0], matrix[n-1][1],matrix[n-1][2])
+
+
+def countSubstrings(s) -> int:
+        if not s:
+            return 0
+        ans = 0
+        
+        for i in range(len(s)):
+            countSubs(s, i, i, ans)
+            countSubs(s, i, i+1, ans)
+        return ans 
+    
+def countSubs(s, left, right, ans):
+    while left >= 0 and right < len(s) and s[left] == s[right]:
+        ans += 1
+        left -= 1
+        right += 1
