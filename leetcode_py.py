@@ -1120,3 +1120,59 @@ def findFriends(matrix, curr, n, seen):
     for i in range(n):
         if matrix[curr][i] == 1 and not seen[i]:
             findFriends(matrix, i, n, seen)
+
+from collections import defaultdict
+class Solution:
+    """
+    @param: words: a set of words without duplicates
+    @return: all word squares
+    """
+    def wordSquares(self, words):
+        # write your code here
+        if len(words) == 0:
+            return []
+        
+        res = []
+        prefix = defaultdict(list)
+        squares = []
+        
+        def initprefix(words):
+            for word in words:
+                prefix[''].append(word)
+                pre = ""
+                for i in range(len(word)):
+                    pre += word[i]
+                    prefix[pre].append(word)
+        
+        def checkprefix(index, Next):
+            for i in range(index+1, wordlen):
+                pre = ""
+                for j in range(index):
+                    pre += squares[j][i]
+                pre += Next[i]
+                if pre not in prefix:
+                    return False
+                
+            return True
+        
+        def dfs(index):
+            if index == wordlen:
+                res.append(squares[:])
+                return 
+            pre = ''
+            for i in range(index):
+                pre += squares[i][index]
+            matchword = prefix[pre][:]
+            m = len(matchword)
+            for i in range(m):
+                if checkprefix(index, matchword[i]) == False:
+                    continue
+                squares.append(matchword[i])
+                dfs(index + 1)
+                squares.pop()
+        
+        initprefix(words)
+        wordlen = len(words[0])
+        dfs(0)
+        
+        return res
