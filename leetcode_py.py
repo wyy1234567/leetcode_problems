@@ -1176,3 +1176,23 @@ class Solution:
         dfs(0)
         
         return res
+
+def searchMatrix(matrix, target):
+        if not matrix or not matrix[0]:
+            return 0
+        m = len(matrix)
+        n = len(matrix[0])
+        result = 0
+        i = m - 1 
+        j = 0 
+        while i >= 0 and j < n:
+            if matrix[i][j] == target:
+                result += 1
+                i -= 1
+                j += 1
+            elif matrix[i][j] < target:
+                j += 1 
+            elif matrix[i][j] > target:
+                i -= 1 
+        
+        return result
