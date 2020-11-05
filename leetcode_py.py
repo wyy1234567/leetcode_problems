@@ -1204,3 +1204,18 @@ def rotate(matrix):
                 matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
         for i in range(n):
             matrix[i].reverse()
+
+
+def multiply(A, B):
+        n = len(A)
+        m = len(A[0])
+        k = len(B[0])
+
+        C = [[0] * k for i in range(n)]
+
+        for i in range(n):
+            for j in range(m):
+                if A[i][j] != 0:
+                    for l in range(k):
+                        C[i][l] += A[i][j] * B[j][l]
+        return C
