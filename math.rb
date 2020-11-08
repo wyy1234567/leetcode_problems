@@ -51,3 +51,30 @@ def two_sum(numbers, target)
     end
     return nil
 end
+
+def merge(nums1, m, nums2, n)
+    left = m - 1
+    right = n - 1
+    merge_ind = m + n - 1
+            
+    while (left >= 0 || right >= 0) do
+        if left < 0
+            nums1[merge_ind] = nums2[right]
+            merge_ind -= 1
+            right -= 1
+        elsif right < 0
+            nums1[merge_ind] = nums1[left]
+            merge_ind -= 1
+            left -= 1
+        elsif nums2[right] > nums1[left]
+            nums1[merge_ind] = nums2[right]
+            right -= 1
+            merge_ind -= 1
+        else
+            nums1[merge_ind] = nums1[left]
+            left -= 1
+            merge_ind -= 1
+        end 
+    end
+    nums1
+end
