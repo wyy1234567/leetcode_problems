@@ -96,3 +96,11 @@ def max_envelopes(envelopes)
     end
     max
 end
+
+def find_complement(num)
+    mask = ~0
+    while (num & mask) do 
+        mask <<= 1
+    end
+    ~mask & ~num
+end
