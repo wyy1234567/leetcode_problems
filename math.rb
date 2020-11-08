@@ -78,3 +78,21 @@ def merge(nums1, m, nums2, n)
     end
     nums1
 end
+
+def max_envelopes(envelopes)
+    return 0 if !envelopes
+    return 1 if envelopes.size == 1
+    envelopes = envelopes.sort
+    arr = [0] * envelopes.size
+    max = 0
+    for i in 0...envelopes.size do 
+        arr[i] = 1
+        for j in 0...i do 
+            if envelopes[j][0] < envelopes[i][0] && envelopes[j][1] < envelopes[i][1]
+                arr[i] = arr[i] > arr[j] + 1 ? arr[i] : arr[j] + 1
+            end
+        end
+        max = [max, arr[i]].max
+    end
+    max
+end
