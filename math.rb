@@ -17,3 +17,19 @@ def check_perfect_number(num)
     print divisors
     divisors.sum == num
 end
+
+def my_sqrt(x)
+    start = 0
+    last = x
+    while start + 1 < last do 
+        mid = start + (last - start) / 2
+        if mid * mid < x
+            start = mid
+        else
+            last = mid
+        end
+    end
+    return start if start * start == x
+    return last if last * last == x
+    return start
+end
