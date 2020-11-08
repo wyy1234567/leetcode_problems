@@ -33,3 +33,21 @@ def my_sqrt(x)
     return last if last * last == x
     return start
 end
+
+def two_sum(numbers, target)
+    low = 0
+    high = numbers.length - 1
+    while low < high do 
+        small = numbers[low]
+        large = numbers[high]
+        sum = small + large
+        if sum == target
+            return [low + 1, high + 1]
+        elsif sum < target
+            low += 1
+        else
+            high -= 1
+        end 
+    end
+    return nil
+end
