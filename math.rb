@@ -130,3 +130,25 @@ def num_sub(s)
     end
     ans % (10 ** 9 + 7)
 end
+
+def self_dividing_numbers(left, right)
+    ans = []
+    for i in left..right do 
+        if is_self_divided(i)
+            ans << i
+        end
+    end
+    ans
+end
+
+def is_self_divided(num)
+    n = num
+    while n > 0 do 
+        curr = n % 10
+        if curr == 0 || num % curr != 0
+            return false
+        end
+        n /= 10
+    end
+    return true
+end
