@@ -115,3 +115,18 @@ def to_hex(num)
     end
     result
 end
+
+def num_sub(s)
+    return 0 if !s
+    curr = 0
+    ans = 0
+    for i in 0...s.size do 
+        if s[i] == '1'
+            curr += 1
+            ans += curr
+        else
+            curr = 0
+        end
+    end
+    ans % (10 ** 9 + 7)
+end
