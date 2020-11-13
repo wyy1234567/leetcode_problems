@@ -165,3 +165,13 @@ def license_key_formatting(s, k)
     end
     string.upcase.reverse
 end
+
+
+def is_power_of_four(num)
+    s = num.to_s(2)
+    zero_count = s[1..s.size - 1].count('0')
+    if s[0] == '1' && zero_count == s.size - 1 && zero_count % 2 == 0
+        return true
+    end
+    return false
+end
