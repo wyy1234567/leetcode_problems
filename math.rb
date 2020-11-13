@@ -152,3 +152,16 @@ def is_self_divided(num)
     end
     return true
 end
+
+def license_key_formatting(s, k)
+    string = ''
+    index = s.size - 1
+    while index >= 0 do 
+        if s[index] != '-'
+            string = string + ((string.size % (k + 1) == k) ? '-' : '')
+            string += s[index]
+        end
+        index -= 1
+    end
+    string.upcase.reverse
+end
