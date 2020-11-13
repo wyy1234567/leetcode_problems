@@ -104,3 +104,14 @@ def find_complement(num)
     end
     ~mask & ~num
 end
+
+def to_hex(num)
+    map = {0 => '0',1 => '1',2 => '2',3 => '3',4 => '4',5 => '5',6 => '6',7 => '7',8 => '8',9 => '9',10 => 'a',11 => 'b',12 => 'c',13 => 'd',14 => 'e',15 => 'f'}
+    return '0' if num == 0
+    result = ''
+    while num != 0 && result.size < 8 do 
+        result = map[(num & 15)] + result
+        num = num >> 4
+    end
+    result
+end
