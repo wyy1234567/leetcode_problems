@@ -207,3 +207,20 @@ def is_match(s, p)
     print dp
     dp[s.size][p.size]
 end
+
+def generate(num_rows)
+    ans = [[1], [1, 1]]
+    return [] if num_rows == 0
+    return [[1]] if num_rows == 1
+    return ans if num_rows == 2
+    
+    for i in 3..num_rows do 
+        curr_arr = [1] * i
+        for j in 1..i - 2 do
+            curr_arr[j] = ans[i - 2][j - 1] + ans[i - 2][j]
+        end
+        ans << curr_arr
+    end
+    ans
+        
+end
