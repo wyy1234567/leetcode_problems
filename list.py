@@ -34,6 +34,19 @@ class ListNode:
             curr.next = ListNode(carry, None)
         return newHead.next
 
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head
+        prev = None
+        curr = head
+        while curr.next:
+            next_node = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_node
+        curr.next = prev
+        return curr
+
         
 
 
