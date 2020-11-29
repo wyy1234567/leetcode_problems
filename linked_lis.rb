@@ -173,5 +173,20 @@ class ListNode
     end
 end
 
+def swap_pairs(head)
+    prev = ListNode.new
+    prev.next = head
+    new_head = prev
+    while (prev.next && prev.next.next) do
+        curr = prev.next
+        next_node = curr.next
+        node = next_node.next
+        prev.next = next_node
+        next_node.next = curr
+        curr.next = node
+        prev = curr
+    end
+    new_head.next   
+end
 
 
