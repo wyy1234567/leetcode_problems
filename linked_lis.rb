@@ -190,3 +190,19 @@ def swap_pairs(head)
 end
 
 
+def odd_even_list(head)
+    if (!head || !head.next)
+        return head
+    end
+    odd = head
+    even = head.next
+    even_head = even
+    while (even && even.next) do
+        odd.next = odd.next.next
+        odd = odd.next
+        even.next = even.next.next
+        even = even.next
+    end
+    odd.next = even_head
+    head
+end
