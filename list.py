@@ -116,3 +116,32 @@ class ListNode:
             slow = slow.next
 
         return head
+
+    def splitListToParts(self, root, k):
+        cur = root 
+        #Use loop to find length of linked list 
+        for N in range(1001): 
+            if not cur: break 
+            cur = cur.next
+        #Width = how many pieces to split into 
+        #Remainder = make initial pieces larger than latter ones 
+        width, remainder = divmod(N,k) #(a // b (floor), x % y)
+        
+        #Initialize solution to have right # of pieces 
+        ans = [None for i in range(k)]
+        
+        pre = None 
+        cur = root 
+        for x in range(k):
+            #start each piece with what's left
+            ans[x] = cur
+            #select how many pieces to put in box 
+            for j in range(width + (1 if remainder > 0 else 0)): 
+                pre = cur
+                if cur: 
+                    cur = cur.next
+            if pre: 
+                pre.next = None 
+            remainder -= 1
+            print (ans[x])
+        return ans
