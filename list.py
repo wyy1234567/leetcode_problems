@@ -2,6 +2,7 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+        self.random = None
     
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         if not l1:
@@ -70,5 +71,30 @@ class ListNode:
         head.next = None
         return p
 
-
-                    
+    def copyRandomList(self, head: 'ListNode') -> 'ListNode':
+        if not head:
+            return None
+        curr = head
+        while curr:
+            new_curr = ListNode(curr.val)
+            next_node = curr.next
+            curr.next = new_curr
+            new_curr.next = next_node
+            curr = next_node
+        
+        curr = head
+        while curr:
+            if not curr.random:
+                curr.next.random = None
+            else:
+                curr.next.random = curr.random.next
+            
+            curr = curr.next.next
+        curr = head.next
+        while curr.next:
+            next_node = curr.next.next
+            curr.next = next_node
+            curr = next_node
+        
+        return head.next
+    
