@@ -158,3 +158,18 @@ class ListNode:
         for elt in l:
             t= ListNode(elt,t)
         return t
+    
+    def deleteDuplicates(self, head):
+        dic = {}
+        node = head
+        while node:
+            dic[node.val] = dic.get(node.val, 0) + 1
+            node = node.next
+        node = head
+        while node:
+            tmp = node
+            for _ in range(dic[node.val]):
+                tmp = tmp.next
+            node.next = tmp
+            node = node.next
+        return head
