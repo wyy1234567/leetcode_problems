@@ -145,3 +145,16 @@ class ListNode:
             remainder -= 1
             print (ans[x])
         return ans
+    
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        if not n: return head
+        l=[]
+        while head:
+            l+=[head.val]
+            head=head.next
+        del l[-n]
+        l.reverse()
+        t=None
+        for elt in l:
+            t= ListNode(elt,t)
+        return t
