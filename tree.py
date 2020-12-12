@@ -70,3 +70,32 @@ class TreeNode:
             return 0
         ans = max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
         return ans
+
+    def isBalanced(self, root: TreeNode) -> bool:
+        self.flag = True 
+        if not root:
+            return True
+        
+        left = self.depth(root.left)
+        right = self.depth(root.right)
+        
+        if not self.flag:
+            return False
+        
+        if abs(left - right) <= 1:
+            return True
+        else:
+            return False
+    
+    def depth(self, root):
+        if not root:
+            return 0
+        
+        left = self.depth(root.left)
+        right = self.depth(root.right)
+        
+        if abs(left - right) > 1:
+            self.flag = False
+            
+        depth = max(left, right) + 1
+        return depth
