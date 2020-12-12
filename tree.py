@@ -113,3 +113,19 @@ class TreeNode:
         t1.val += t2.val 
         
         return t1
+
+    def sortedArrayToBST(self, nums):
+        root = self.buildTree(nums, 0, len(nums) - 1)
+        return root
+        
+    def buildTree(self, arr, start_i, end_i): 
+        if start_i < end_i: 
+            return None 
+        mid = (start_i + end_i) // 2 
+        root = TreeNode(arr[mid])
+        root.left = self.buildTree(arr, start_i, mid-1)
+        root.right = self.buildTree(arr, mid+1, end_i)
+        print(root.val)
+        return root
+        
+        
