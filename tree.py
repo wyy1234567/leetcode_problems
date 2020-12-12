@@ -127,5 +127,21 @@ class TreeNode:
         root.right = self.buildTree(arr, mid+1, end_i)
         print(root.val)
         return root
+
+    def getMinimumDifference(self, root: TreeNode) -> int:
+        ans = float('inf')
+        nodeList = self.inorderTraversal(root) 
+        
+        for i in range(1, len(nodeList)): 
+            diff = nodeList[i] - nodeList[i - 1]
+            ans = min(diff, ans)
+        return ans
+        
+        
+    def inorderTraversal(self, root):
+        if not root:
+            return []
+        
+        return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
         
         
