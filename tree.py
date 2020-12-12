@@ -47,4 +47,20 @@ class Solution:
         self.maxSum = max(self.maxSum, leftSum + rightSum + root.val)
         
         return max(leftSum + root.val, rightSum + root.val)
-        
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right 
+    
+    def pruneTree(self, root: TreeNode) -> TreeNode:
+        if not root:
+            return root
+        root.left = self.pruneTree(root.left)
+        root.right = self.pruneTree(root.right)
+        if root.val == 0 and not root.left and not root.right:
+            root = None
+            
+        return root
