@@ -15,7 +15,7 @@ def minRemoveToMakeValid(s: str) -> str:
             s[stack.pop()] = ''
         return ''.join(s)
 
-def exist(self, board):
+def exist(board, word):
         if not board:
             return False
         
