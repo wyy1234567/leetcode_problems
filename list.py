@@ -173,3 +173,17 @@ class ListNode:
             node.next = tmp
             node = node.next
         return head
+
+
+def merge(self, intervals):
+        # intervals.sort(key = lambda l:l[0])
+        intervals.sort()
+        result = []
+        for i in intervals: 
+            #case 1: not overlap 
+            if not result or i[0] > result[-1][1]: 
+                result.append(i)
+            #case 2: overlap exist 
+            else: 
+                result[-1][1] = max(i[1], result[-1][1])
+        return result
