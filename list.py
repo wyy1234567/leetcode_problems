@@ -187,3 +187,28 @@ def merge(self, intervals):
             else: 
                 result[-1][1] = max(i[1], result[-1][1])
         return result
+
+def nextPermutation(nums):
+        if not nums or len(nums) == 1:
+            return 
+        
+        pointer = len(nums) - 2
+        while pointer >= 0 and nums[pointer] >= nums[pointer + 1]:
+            pointer -= 1
+            
+        if pointer < 0:
+            nums.sort() 
+            return 
+        
+        min_gap = float('inf')
+        index = 0
+        for i in range(pointer + 1, len(nums)):
+            if nums[i] > nums[pointer]:
+                if nums[i] - nums[pointer] < min_gap:
+                    min_gap = nums[i] - nums[pointer]
+                    index = i
+        
+        temp = nums[pointer]
+        nums[pointer] = nums[index]
+        nums[index] = temp
+        nums[(pointer+1):] = sorted(nums[(pointer+1):])
