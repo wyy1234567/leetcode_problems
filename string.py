@@ -41,3 +41,30 @@ def exist(board, word):
                     return True
 
         return False
+
+
+def spiralOrder(matrix):
+        if not matrix:
+            return []
+        rows = len(matrix)
+        columns = len(matrix[0])
+        x = [0, 1, 0, -1]
+        y = [1, 0, -1, 0]
+        i, j, d = 0, 0, 0
+        seen = [[False] * columns for _ in range(rows)]
+        ans = []
+        for _ in range(rows * columns):
+            ans.append(matrix[i][j])
+            seen[i][j] = True
+            ni = i + x[d]
+            nj = j + y[d]
+            
+            if 0 <= ni < rows and 0 <= nj < columns and not seen[ni][nj]:
+                i = ni
+                j = nj
+            else:
+                d = (d + 1) % 4
+                i = i + x[d]
+                j = j + y[d]
+        
+        return ans
