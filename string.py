@@ -68,3 +68,23 @@ def spiralOrder(matrix):
                 j = j + y[d]
         
         return ans
+
+
+def convert(s, numRows):
+    if numRows == 1 or len(s) < numRows:
+        return s 
+
+    lines = [''] * numRows
+    step, index = 1, 0 
+
+    for char in s:
+        lines[index] += char 
+
+        if index == 0:
+            step = 1 
+        elif index == numRows - 1:
+            step = -1 
+        
+        index += step 
+    
+    return ''.join(lines)
