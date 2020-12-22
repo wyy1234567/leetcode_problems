@@ -3,6 +3,46 @@ class ListNode:
         self.val = val
         self.next = next
         self.random = None
+
+
+    def mergeKList(self, lists): 
+        if not lists:
+            return None 
+        
+        if len(lists) == 1:
+            return lists[0]
+
+        mid = len(lists) // 2 
+        left, right = self.mergeKList(lists[:mid]), self.mergeKList(lists[mid:])
+
+        return self.mergeLists(left, right)
+    
+    def mergeLists(self, l1, l2):
+        if not l1:
+            return l2 
+        if not l2:
+            return l1 
+        
+        dummy = ListNode()
+        curr = dummy 
+
+        while l1 and l2: 
+            if l1.val < l2.val:
+                curr.next = l1 
+                l1 = l1.next 
+            else:
+                curr.next = l2
+                l2 = l2.next
+        
+            curr = curr.next 
+        
+        if l1:
+            curr.next = l1
+        
+        if l2: 
+            curr.next = l2 
+        
+        return dummy.next
     
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         if not l1:
@@ -212,3 +252,6 @@ def nextPermutation(nums):
         nums[pointer] = nums[index]
         nums[index] = temp
         nums[(pointer+1):] = sorted(nums[(pointer+1):])
+    
+
+    
