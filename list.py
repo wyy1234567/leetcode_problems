@@ -309,3 +309,17 @@ def searchMatrix(matrix, target):
                 j -= 1
         
         return False
+
+def findMin(nums):
+    last = nums[-1]
+    left = 0
+    right = len(nums) - 1 
+    while left + 1 < right:
+        mid = left + (right - left) // 2 
+            
+        if nums[mid] > last:
+            left = mid 
+        else:
+            right = mid
+        
+    return min(nums[left], nums[right])
