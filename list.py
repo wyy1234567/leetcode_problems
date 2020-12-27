@@ -290,3 +290,22 @@ def findMaxElement(nums):
     if nums[left] > nums[right]:
         return left
     return right
+
+def searchMatrix(matrix, target):
+        if not matrix or not matrix[0]:
+            return False
+        m = len(matrix)
+        n = len(matrix[0])
+        
+        i, j = 0, n - 1 
+        
+        while i < m and j >= 0:
+            num = matrix[i][j]
+            if num == target:
+                return True 
+            elif num < target:
+                i += 1
+            else:
+                j -= 1
+        
+        return False
