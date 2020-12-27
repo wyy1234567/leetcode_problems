@@ -255,3 +255,20 @@ def nextPermutation(nums):
     
 
     
+def searchInsert(nums, target):
+        left, right = 0, len(nums)
+        
+        while left + 1 < right: 
+            mid = left + (right - left) // 2 
+            if nums[mid] == target: 
+                return mid 
+            
+            if nums[mid] < target: 
+                left = mid 
+            else:
+                right = mid 
+                
+        if nums[left] >= target:
+            return left 
+        
+        return right
