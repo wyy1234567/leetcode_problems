@@ -370,3 +370,20 @@ def lengthOfLastWord(self, s: str) -> int:
         return len(arr[-1])
     else:
         return 0
+
+
+def generateMatrix(self, n):
+    matrix = [[0]*n for _ in range(n)]
+    directions = ((0, 1), (1, 0), (0, -1), (-1, 0))
+    d = 0
+    y, x = 0, 0
+    for i in range(1, n*n+1):
+        matrix[y][x] = i
+        dy, dx = directions[d % 4]
+        if -1 < y+dy < n and -1 < x+dx < n and matrix[y+dy][x+dx] == 0:
+            y, x = y+dy, x+dx
+        else:
+            d += 1
+            dy, dx = directions[d % 4]
+            y, x = y+dy, x+dx
+    return matrix
