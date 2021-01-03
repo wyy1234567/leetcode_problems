@@ -323,3 +323,20 @@ def findMin(nums):
             right = mid
         
     return min(nums[left], nums[right])
+
+
+def subarraySum(nums, k):
+    count, sum, numDic = 0, 0, {}
+    numDic[0] = 1
+        
+    for i in range(len(nums)):
+        sum += nums[i]
+        toFind = sum - k
+        if toFind in numDic:
+            count += numDic[toFind]
+        if sum in numDic:
+            numDic[sum] += 1
+        else:
+            numDic[sum] = 1
+        
+    return count
