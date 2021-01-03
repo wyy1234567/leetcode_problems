@@ -215,7 +215,7 @@ class ListNode:
         return head
 
 
-    def rotateList(head, k):
+    def rotateList(self, head, k):
         if not head:
             return None 
         
