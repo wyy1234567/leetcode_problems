@@ -443,3 +443,16 @@ def sortColors(nums):
         else:
             nums[white], nums[blue] = nums[blue], nums[white]
             blue -= 1
+
+
+def combine(n, k):
+        ret = []
+        dfs(list(range(1, n+1)), k, [], ret)
+        return ret
+    
+def dfs(nums, k, path, ret):
+    if len(path) == k:
+        ret.append(path)
+        return 
+    for i in range(len(nums)):
+        dfs(nums[i+1:], k, path+[nums[i]], ret)
