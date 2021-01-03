@@ -362,3 +362,11 @@ def canJump(nums):
             lastPosition = i
                 
     return lastPosition == 0
+
+def lengthOfLastWord(self, s: str) -> int:
+    arr = s.split()
+        
+    if arr:
+        return len(arr[-1])
+    else:
+        return 0
