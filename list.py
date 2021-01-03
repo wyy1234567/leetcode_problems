@@ -215,6 +215,31 @@ class ListNode:
         return head
 
 
+    def rotateList(head, k):
+        if not head:
+            return None 
+        
+        lastNode = head
+        length = 1 
+        
+        while lastNode.next:
+            lastNode = lastNode.next
+            length += 1 
+        
+        k = k % length
+        
+        lastNode.next = head
+        
+        temp = head
+        for _ in range(length - k - 1):
+            temp = temp.next
+        
+        result = temp.next
+        temp.next = None
+        
+        return result
+
+
 def merge(self, intervals):
         # intervals.sort(key = lambda l:l[0])
         intervals.sort()
