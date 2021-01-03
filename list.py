@@ -352,3 +352,13 @@ def rotateMatrix(matrix):
             matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 -i]
             matrix[j][n - 1 - i] = matrix[i][j]
             matrix[i][j] = temp
+
+
+def canJump(nums):
+    lastPosition = len(nums) - 1
+        
+    for i in range(len(nums) - 1, -1, -1):
+        if i + nums[i] >= lastPosition:
+            lastPosition = i
+                
+    return lastPosition == 0
