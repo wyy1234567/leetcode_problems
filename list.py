@@ -456,3 +456,20 @@ def dfs(nums, k, path, ret):
         return 
     for i in range(len(nums)):
         dfs(nums[i+1:], k, path+[nums[i]], ret)
+
+def findMinRotated(nums):
+    pivot = nums[-1]
+    left, right = 0, len(nums) - 1 
+
+    while left + 1 < right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] > pivot:
+            left += 1 
+        else:
+            right -= 1 
+    
+    if nums[left] <= pivot:
+        return nums[left]
+    else:
+        return nums[right]
