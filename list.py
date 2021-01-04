@@ -473,3 +473,22 @@ def findMinRotated(nums):
         return nums[left]
     else:
         return nums[right]
+
+def findMinRotatedDuplicates(nums):
+
+    pivot = nums[-1]
+    left, right = 0, len(nums) - 1 
+
+    while left + 1 < right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] < pivot:
+            right = mid 
+        elif nums[mid] > pivot:
+            left = mid 
+        else:
+            if nums[left] == nums[mid]:
+                left += 1 
+            else:
+                right -= 1 
+    return min(nums[left], nums[right])
