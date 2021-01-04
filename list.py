@@ -465,9 +465,9 @@ def findMinRotated(nums):
         mid = left + (right - left) // 2
 
         if nums[mid] > pivot:
-            left += 1 
+            left = mid
         else:
-            right -= 1 
+            right = mid
     
     if nums[left] <= pivot:
         return nums[left]
