@@ -1219,3 +1219,23 @@ def multiply(A, B):
                     for l in range(k):
                         C[i][l] += A[i][j] * B[j][l]
         return C
+
+def nthUglyNumber(n):
+        
+    nums = [1]
+    twos, threes, fives = 0, 0, 0 
+        
+    for i in range(n - 1):
+        num = min(nums[twos] * 2, nums[threes] * 3, nums[fives] * 5)
+            
+            
+        if num == nums[twos] * 2:
+            twos += 1
+        if num == nums[threes] * 3:
+            threes += 1 
+        if num == nums[fives] * 5:
+            fives += 1 
+        
+        nums.append(num)
+        
+    return nums[-1]

@@ -532,3 +532,4 @@ def simplifyPath(path):
             stack.append(file)
 
     return '/' + '/'.join(stack)
+
