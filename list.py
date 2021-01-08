@@ -516,3 +516,19 @@ def uniquePathsWithObstacles(obstacleGrid):
                 obstacleGrid[i][j] = obstacleGrid[i-1][j] + obstacleGrid[i][j-1]
 
     return obstacleGrid[col-1][row-1]
+
+
+def simplifyPath(path):
+
+    stack = []
+
+    for file in path.split('/'):
+        if file in ('', '.'):
+            pass
+        elif file == '..':
+            if stack:
+                stack.pop()
+        else:
+            stack.append(file)
+
+    return '/' + '/'.join(stack)
