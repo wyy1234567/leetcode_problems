@@ -547,5 +547,13 @@ def combinations(n, k):
     
     backtrack(n, k, res, [], 1)
     return res
-    
+
+def removeDuplicatesSortedList(nums):
+    index = 0 
+    for n in nums:
+        if index < 2 or n > nums[index - 2]:
+            nums[index] = n 
+            index += 1
+
+    return index
     
