@@ -568,3 +568,20 @@ def houseRobberI(nums):
         dp[i] = max(dp[i-1], dp[i-2] + nums[i-1])
     
     return dp[-1]
+
+def houseRobberII(nums):
+    size = len(nums)
+
+    notRobFront = [0] * (size + 1)
+    notRobTail = [0] * (size + 1)
+
+    notRobFront[1] = 0
+    notRobTail[1] = nums[0]
+
+    for i in range(2, size):
+        notRobFront[i] = max(notRobFront[i-1], notRobFront[i-2]+nums[i-1])
+        notRobTail[i] = max(notRobTail[i-1], notRobTail[i-2]+nums[i-1])
+    
+    notRobFront[-1] = max(notRobFront[size-1], notRobFront[size-2] + nums(-1))
+
+    return max(notRobFront[-1], notRobTail[-2])
