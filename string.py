@@ -121,3 +121,44 @@ def strStr(haystack, needle):
                 return i 
     
     return -1
+
+
+def minWindow(s, t):
+    if not s or not t:
+        return ""
+
+    dict_t = {}
+    for c in t:
+        dict_t[c] = dict_t.get(c, 0) + 1
+    required = len(dict_t)
+    left, right, formed = 0, 0, 0
+    window = {}
+    ans = float('inf'), None, None 
+
+    while right < len(s):
+        char = s[right]
+
+        window[char] = window.get(char, 0) + 1 
+
+        if char in dict_t and window[char] == dict_t[char]:
+            formed += 1 
+
+        while left < right and formed == required:
+            char = s[left]
+
+            if right - left + 1 < ans[0]:
+                ans = (right - left + 1, left, right)
+            
+            window[char] -= 1 
+
+            if char in dict_t and window[char] < dict_t[char]:
+                formed -= 1 
+            
+            left += 1 
+
+        right += 1
+
+    return "" if ans[0] == float('inf') else s[ans[1]:ans[2]+1]
+
+
+            
