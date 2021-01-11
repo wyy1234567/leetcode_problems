@@ -642,3 +642,28 @@ def deleteAndEarn(nums):
         dp.append(max(dp[i-1], freq[i]+dp[i-2]))
     
     return dp[-1]
+
+# 'A' : Absent.
+# 'L' : Late.
+# 'P' : Present.
+# A record is regarded as rewardable if it doesn't contain more than one 'A' (absent) or more than two continuous 'L' (late).
+def checkRecord(n):
+    dp00 = [0] * (n + 1)
+    dp01 = [0] * (n + 1)
+    dp02 = [0] * (n + 1)
+    dp10 = [0] * (n + 1)
+    dp11 = [0] * (n + 1)
+    dp12 = [0] * (n + 1)
+
+    dp00[0] = 1
+    m = 10 ** 9 + 1
+
+    for i in range(1, n+1):
+        dp00[i] = dp00[i-1] + dp01[i-1] + dp02[i-1] #plus 3 P
+        dp01[i] = dp00[i-1] #plus one L
+        dp02[i] = dp01[i-1] #plus one L 
+        dp10[i] = dp00[i-1] + dp01[i-1] + dp02[i-1] + dp10[i-1] + dp11[i-1] + dp12[i-1]
+        dp11[i] = dp10[i-1]
+        dp12[i] = dp11[i-1]
+    
+    return (dp00[n]+dp01[n]+dp02[n]+dp10[n]+dp11[n]+dp12[n]) % m
