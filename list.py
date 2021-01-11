@@ -626,4 +626,19 @@ def findRotateSteps(ring, key):
         ans = min(ans, dp[n-1][pos])
     
     return ans + n
+
+# Given an array nums of integers, you can perform operations on the array.
+# In each operation, you pick any nums[i] and delete it to earn nums[i] points. After, you must delete every element equal to nums[i] - 1 or nums[i] + 1.
+# You start with 0 points. Return the maximum number of points you can earn by applying such operations. 
+def deleteAndEarn(nums):
+    freq = [0] * (max(nums) + 1)
+
+    for n in nums:
+        freq[n] += n 
     
+    dp = [freq[0], max(freq[0], freq[1])]
+
+    for i in range(2, len(freq)):
+        dp.append(max(dp[i-1], freq[i]+dp[i-2]))
+    
+    return dp[-1]
