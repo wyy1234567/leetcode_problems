@@ -1,3 +1,4 @@
+import collections
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -598,3 +599,31 @@ def wiggleMaxLength(nums):
             down = up + 1 
     
     return max(up, down)
+
+
+
+def findRotateSteps(ring, key):
+    index = collections.defaultdict(list)
+    m, n = len(ring), len(key)
+    dp = [[float('inf') for _ in range(m)] for _ in range(n)]
+
+    #create a map to record index of every character in ring, only calculate these characters in keys 
+    for i in range(m):
+        index[ring[i]].append(i)
+    
+    #initialize the dp matrix with first character in key 
+    for pos in index[key[0]]:
+        dp[0][pos] = min(dp[0][pos], pos, m - pos)
+
+    #start from the second character in key, calculate the path of moving it to 12'clock position
+    for i in range(1, n):
+        for curr in index[key[i]]:
+            for pre in index[key[i-1]]:
+                dp[i][curr] = min(dp[i][curr], dp[i-1][pre] + min(abs(curr - pre), m-abs(curr-pre)))
+    
+    ans = float('inf')
+    for pos in index[key[-1]]:
+        ans = min(ans, dp[n-1][pos])
+    
+    return ans + n
+    
