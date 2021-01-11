@@ -585,3 +585,16 @@ def houseRobberII(nums):
     notRobFront[-1] = max(notRobFront[size-1], notRobFront[size-2] + nums(-1))
 
     return max(notRobFront[-1], notRobTail[-2])
+
+
+def wiggleMaxLength(nums):
+
+    up, down = 1, 1 
+
+    for i in range(1, len(nums)):
+        if nums[i] > nums[i-1]:
+            up = down + 1
+        if nums[i] < nums[i-1]:
+            down = up + 1 
+    
+    return max(up, down)
