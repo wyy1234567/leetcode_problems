@@ -239,6 +239,25 @@ class ListNode:
         temp.next = None
         
         return result
+    
+    #place nodes that hold value less than x before, put remaining nodes after
+    def partitionWithValue(self, head, x):
+        before = beforeHead = ListNode(0)
+        after = afterHead = ListNode(0)
+
+        while head:
+            if head.val < x:
+                before.next = head 
+                before = before.next 
+            else:
+                after.next = head
+                after = after.next
+            head = head.next 
+        
+        after.next = None 
+        before.next = afterHead.next 
+        return beforeHead.next
+
 
 
 def merge(self, intervals):
