@@ -686,3 +686,14 @@ def checkRecord(n):
         dp12[i] = dp11[i-1]
     
     return (dp00[n]+dp01[n]+dp02[n]+dp10[n]+dp11[n]+dp12[n]) % m
+
+def maxProduct(nums):
+    dpMax, dpMin = [0] * len(nums), [0] * len(nums)
+    dpMax[0] = dpMin[0] = result = nums[0]
+
+    for i in range(1, len(nums)):
+        dpMax[i] = max(dpMax[i-1] * nums[i], dpMin[i-1]*nums[i], nums[i])
+        dpMin[i] = min(dpMax[i-1] * nums[i], dpMin[i-1]*nums[i], nums[i])
+        result = max(result, dpMax[i])
+    
+    return result
