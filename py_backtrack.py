@@ -15,3 +15,15 @@ def combinationSum(candidates, target):
     backtrack(candidates, [], res, target)
 
     return res
+
+#subset
+def subset(nums):
+    res = []
+
+    def backtrack(nums, path, res):
+        res.append(path)
+        for i in range(len(nums)):
+            backtrack(nums[i+1:], path+[nums[i]], res)
+
+    backtrack(nums, [], res)
+    return res
