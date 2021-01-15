@@ -161,4 +161,21 @@ def minWindow(s, t):
     return "" if ans[0] == float('inf') else s[ans[1]:ans[2]+1]
 
 
+def decodeWays(s):
+    dp = [0] * (len(s) + 1)
+    dp[0] = 1 #1 way to decode empty string
+    dp[1] = 0 if s[0] == '0' else 1
+
+    for i in range(2, len(dp)):
+        char = int(s[i-1])
+        chars = int(s[i-2:i])
+
+        if 0 < char <= 9:
+            dp[i] += dp[i-1]
+        
+        if 10 <= chars <= 26:
+            dp[i] += dp[i-2]
+
+    return dp[-1]
+
             
