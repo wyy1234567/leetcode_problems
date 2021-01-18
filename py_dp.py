@@ -45,4 +45,15 @@ def combinationSum4(nums, target):
                 dp[i] += dp[i - num]
     
     return dp[target]
+
+# You are given coins of different denominations and a total amount of money. Write a function to compute the number of combinations that make up that amount. You may assume that you have infinite number of each kind of coin.
+def coinChange(amount, coins):
+    dp = [1] + [0] * amount 
+
+    for coin in coins:
+        for i in range(1, amount + 1):
+            if i >= coin:
+                dp[i] += dp[i-coin]
+
+    return dp[amount]
         
