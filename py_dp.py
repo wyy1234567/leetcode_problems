@@ -35,4 +35,14 @@ def countSquares(matrix):
                 dp[i][j] = 0
                     
     return res
+
+def combinationSum4(nums, target):
+    dp = [1] + [0] * target
+
+    for i in range(1, len(dp)):
+        for num in nums:
+            if i >= num:
+                dp[i] += dp[i - num]
+    
+    return dp[target]
         
