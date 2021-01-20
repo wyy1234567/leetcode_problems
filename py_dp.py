@@ -56,4 +56,22 @@ def coinChange(amount, coins):
                 dp[i] += dp[i-coin]
 
     return dp[amount]
-        
+
+# Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.       
+def canPartition(nums):
+
+    numsSum = sum(nums)
+
+    if numsSum % 2 == 1:
+        return False 
+    
+    numsSum = numsSum // 2 
+
+    dp = [True] + [False] * numsSum
+
+    for num in nums:
+        for i in range(numsSum, -1, -1):
+            if i > num:
+                dp[i] = dp[i] or dp[i-num]
+    
+    return dp[numsSum]
