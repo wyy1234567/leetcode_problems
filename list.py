@@ -697,3 +697,54 @@ def maxProduct(nums):
         result = max(result, dpMax[i])
     
     return result
+
+#Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
+# A region is captured by flipping all 'O's into 'X's in that surrounded region.
+class Solution:
+    def solve(self, board):
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        m, n = len(board), len(board[0])
+        for i in range(m):
+            if board[i][0] == 'O':
+                self.mark(i, 0, board)
+            if board[i][n-1] == 'O':
+                self.mark(i, n-1, board)
+        
+        for i in range(n):
+            if board[0][i] == 'O':
+                self.mark(0, i, board)
+            if board[m-1][i] == 'O':
+                self.mark(m-1, i, board)
+                
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+                if board[i][j] == '#':
+                    board[i][j] = 'O'
+            
+        
+        
+    
+    def mark(self, i, j, board):
+        m, n = len(board), len(board[0])
+        queue= [[i, j]]
+        x = [0,0,1,-1]
+        y = [1,-1,0,0]
+        
+        while queue:
+            curr = queue.pop() 
+            currX = curr[0]
+            currY = curr[1]
+            board[currX][currY] = '#'
+            
+            for i in range(4):
+                adjX = currX + x[i]
+                adjY = currY + y[i]
+                
+                if adjX >= 0 and adjX < m and adjY >= 0 and adjY < n and board[adjX][adjY] == 'O':
+                    queue.append([adjX, adjY])
