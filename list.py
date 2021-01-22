@@ -748,3 +748,28 @@ class Solution:
                 
                 if adjX >= 0 and adjX < m and adjY >= 0 and adjY < n and board[adjX][adjY] == 'O':
                     queue.append([adjX, adjY])
+    
+    def largestDivisibleSubset(self, nums):   
+        nums.sort()
+        pre = [0] * len(nums)
+        dp = [0] * len(nums)
+        size, index, res = 0, -1, []
+        
+        for i in range(len(nums)):
+            pre[i] = -1 
+            dp[i] = 1 
+            
+            for j in range(i):
+                if nums[i] % nums[j] == 0 and dp[i] < 1 + dp[j]:
+                    dp[i] = dp[j] + 1 
+                    pre[i] = j 
+            
+            if size <= dp[i]:
+                size = dp[i]
+                index = i
+                
+        for i in range(size):
+            res.append(nums[index])
+            index = pre[index]
+        
+        return res
