@@ -95,4 +95,18 @@ def findTargetSumWays(nums, S):
                 dp[i][j] += dp[i-1][j+nums[i]]
         
     return dp[-1][totalSum + S]
+
+# Given a number n. You have to get exactly n 'A' on the notepad by performing the minimum number of steps permitted. Output the minimum number of steps to get n 'A'.
+def minSteps(n):
+    dp = [float('inf')] * (n+1)
+    dp[1] = 0
+
+    for i in range(2, n+1):
+        for j in range(2, i+1):
+            if i % j == 0:
+                dp[i] = min(dp[i], dp[i//j] + j)
+                break
+            
+    return dp[n]
+
         
