@@ -773,3 +773,20 @@ class Solution:
             index = pre[index]
         
         return res
+   
+    def knapsack(self, values, weights, maxWeightConstraint):
+        self.res = 0
+    
+        def backtrack(values, weights, maxWeightConstraint, currWeight, currVal):
+            if currWeight > maxWeightConstraint:
+                return 
+            else:
+                self.res = max(self.res, currVal)
+            
+            for i in range(len(weights)):
+                backtrack(values[i+1:], weights[i+1:], maxWeightConstraint, currWeight+weights[i], currVal+values[i])
+        
+        backtrack(values, weights, maxWeightConstraint, 0, 0)
+        return self.res
+
+
