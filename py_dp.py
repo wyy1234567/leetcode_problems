@@ -106,7 +106,18 @@ def minSteps(n):
             if i % j == 0:
                 dp[i] = min(dp[i], dp[i//j] + j)
                 break
-            
+
     return dp[n]
+
+def knapsack(values, weights, maxWeightConstraint):
+    row, col = len(values)+1, maxWeightConstraint+1
+    dp = [[0 for _ in range(col)] for _ in range(row)]
+
+    for i in range(1, row):
+        for j in range(1, col):
+            if j >= weights[i-1]:
+                dp[i][j] = max(dp[i-1][j], dp[i-1][j-weights[i-1]]+values[i-1])
+    
+    return dp[row-1][col-1]
 
         
