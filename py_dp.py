@@ -161,3 +161,22 @@ def minCost(n, cuts):
             dp[i][i + d] = min(dp[i][m] + dp[m][i + d] for m in range(i + 1, i + d)) + cuts[i + d] - cuts[i]
 
     return dp[0][k - 1]
+
+
+def trapWater(height):
+    size = len(height)
+    left, right = [0] * size, [0]*size
+    left[0] = height[0]
+    right[-1] = height[-1]
+    res = 0
+
+    for i in range(1, size):
+        left[i] = max(height[i], left[i-1])
+    
+    for i in range(size-2, -1, -1):
+        right[i] = max(height[i], right[i+1])
+    
+    for i in range(1, size -1):
+        res += min(left[i], right[i]) - height[i]
+    
+    return res
