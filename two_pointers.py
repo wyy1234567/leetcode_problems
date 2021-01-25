@@ -14,4 +14,20 @@ def maxWater(height):
             right -= 1
     
     return res
+
+
+# Given an array nums of n integers where n > 1,  return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
+def productExceptSelf(nums):
+    size = len(nums)
+    left, right, res = [1] * size, [1] * size, []
+        
+    for i in range(1, size):
+        left[i] = left[i-1] * nums[i-1]
             
+    for i in range(size-2, -1, -1):
+        right[i] = right[i+1] * nums[i+1]
+            
+    for i in range(size):
+        res.append(left[i]*right[i])
+            
+    return res
