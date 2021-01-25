@@ -152,7 +152,7 @@ def bestTeamScore(scores, ages):
     return ans
 
 
-def minCost(self, n: int, cuts: List[int]) -> int:
+def minCost(n, cuts):
     cuts = sorted(cuts + [0, n])
     k = len(cuts)
     dp = [[0] * k for _ in range(k)]
