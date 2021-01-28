@@ -28,5 +28,15 @@ class Node:
             return max(left, right)+1
         height(root)
         return self.ans
+    
+    def invertTree(self, root):
+        if not root:
+            return None
         
+        leftTree = root.left
+        
+        root.left = self.invertTree(root.right)
+        root.right = self.invertTree(leftTree)
+        
+        return root
     
