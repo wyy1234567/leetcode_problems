@@ -53,4 +53,28 @@ class Node:
         right = self.hasPathSum(root.right, sum)
         
         return left or right
+
+
+    def isSubtree(self, s, t):
+        
+        if not s:
+            return False
+
+        #tell if two trees are identical from the root
+        def areSame(s, t):
+            if not s and not t:
+                return True
+            
+            if not s or not t or s.val != t.val:
+                return False
+            
+            left = areSame(s.left, t.left)
+            right = areSame(s.right, t.right)
+            
+            return left and right
+            
+        return areSame(s, t) or self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
+        
+     
+    
     
