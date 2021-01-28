@@ -39,4 +39,18 @@ class Node:
         root.right = self.invertTree(leftTree)
         
         return root
+
+    def hasPathSum(self, root, sum):
+        if not root:
+            return False
+        
+        sum -= root.val
+        
+        if not root.left and not root.right:
+            return sum == 0
+        
+        left = self.hasPathSum(root.left, sum)
+        right = self.hasPathSum(root.right, sum)
+        
+        return left or right
     
