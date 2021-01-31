@@ -75,6 +75,24 @@ class Node:
             
         return areSame(s, t) or self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
         
-     
+    
+    def isSymmetric(self, root):
+        if not root:
+            return True
+        
+        def same(r, l):
+            if not r and not l:
+                return True 
+            
+            if not r or not l:
+                return False 
+            
+            if r.val != l.val:
+                return False 
+            
+            return same(r.left, l.right) and same(r.right, l.left)
+            
+        return same(root.left, root.right)
+        
     
     
