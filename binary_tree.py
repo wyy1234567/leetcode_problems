@@ -106,4 +106,20 @@ class Node:
         return min(left, right)+1
         
     
-    
+    def sumOfLeftLeaves(self, root):
+        if not root:
+            return 0 
+        
+        queue = [root]
+        res = 0
+        
+        while queue:
+            curr = queue.pop(0)
+            if curr.left:
+                if not curr.left.left and not curr.left.right:  
+                    res += curr.left.val 
+                queue.append(curr.left) 
+            if curr.right:
+                queue.append(curr.right)
+                
+        return res
