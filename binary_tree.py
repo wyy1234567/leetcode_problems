@@ -91,8 +91,19 @@ class Node:
                 return False 
             
             return same(r.left, l.right) and same(r.right, l.left)
-            
+
         return same(root.left, root.right)
+    
+    def minDepth(self, root):
+        if not root:
+            return 0
+        left = self.minDepth(root.left)
+        right = self.minDepth(root.right)
+        
+        if left == 0 or right == 0:
+            return left + right +1
+        
+        return min(left, right)+1
         
     
     
