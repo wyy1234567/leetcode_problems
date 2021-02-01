@@ -213,3 +213,22 @@ class Node:
         
         pathRoot(root)
         return self.res
+    
+
+    def rob(self, root):
+        def helper(root): #return [rob root, not rob root]
+            if not root:
+                return [0, 0]
+            
+            if not root.left and not root.right:
+                return [root.val, 0]
+            
+            left = helper(root.left)
+            right = helper(root.right)
+            
+            robRoot = root.val + left[1] + right[1]
+            notRobRoot = max(left[0] + right[0], left[0]+right[1], left[1]+right[0], left[1] + right[1])
+            
+            return [robRoot, notRobRoot]
+        
+        return max(helper(root))
