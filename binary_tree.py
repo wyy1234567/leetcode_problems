@@ -188,3 +188,28 @@ class Node:
             return True
         
         return checkNode(root, float('-inf'), float('inf'))
+    
+    # Given the root of a binary tree, return the length of the longest path, where each node in the path has the same value. This path may or may not pass through the root.
+    def longestUnivaluePath(self, root):
+        if not root:
+            return 0
+        self.res = float('-inf')
+        def pathRoot(node):
+            if not node:
+                return 0
+            left = pathRoot(node.left)
+            right = pathRoot(node.right)
+            leftPath, rightPath = 0, 0
+            
+            if node.left and node.val == node.left.val:
+                leftPath = left + 1 
+            
+            if node.right and node.val == node.right.val:
+                rightPath = right + 1 
+                
+            self.res = max(self.res, leftPath + rightPath)
+            
+            return max(leftPath, rightPath)
+        
+        pathRoot(root)
+        return self.res
