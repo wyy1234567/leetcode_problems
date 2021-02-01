@@ -123,3 +123,24 @@ class Node:
                 queue.append(curr.right)
                 
         return res
+    
+
+    #Given a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+    def rightSideView(self, root):
+        if not root:
+            return []
+        
+        queue, res = [root], []
+        
+        while queue:
+            size = len(queue)
+            
+            for i in range(size):
+                curr = queue.pop(0)
+                if curr.left: queue.append(curr.left)
+                if curr.right: queue.append(curr.right)
+                    
+                if i == size - 1:
+                    res.append(curr.val)
+        
+        return res
