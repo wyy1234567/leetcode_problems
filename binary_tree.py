@@ -171,3 +171,20 @@ class Node:
                 return True
         
         return False
+    
+    def isValidBST(self, root):
+        def checkNode(node,down, up):
+            if not node:
+                return True
+            val = node.val
+            
+            if val <= down or val >= up:
+                return False
+
+            if not checkNode(node.left, down, val):
+                return False
+            if not checkNode(node.right, val, up):
+                return False
+            return True
+        
+        return checkNode(root, float('-inf'), float('inf'))
