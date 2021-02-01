@@ -144,3 +144,30 @@ class Node:
                     res.append(curr.val)
         
         return res
+
+    # Two nodes of a binary tree are cousins if they have the same depth, but have different parents.
+    def isCousins(self, root, x, y):
+        if not root:
+            return False
+        lmap = {}
+        queue = [root]
+        
+        while queue:
+            size = len(queue)
+            level = set()
+            
+            for _ in range(size):
+                curr = queue.pop(0)
+                level.add(curr.val)
+                
+                if curr.left: 
+                    queue.append(curr.left)
+                    lmap[curr.left.val] = curr.val
+                if curr.right: 
+                    queue.append(curr.right)
+                    lmap[curr.right.val] = curr.val
+                
+            if x in level and y in level and lmap[x] != lmap[y]:
+                return True
+        
+        return False
