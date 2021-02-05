@@ -789,4 +789,26 @@ class Solution:
         backtrack(values, weights, maxWeightConstraint, 0, 0)
         return self.res
 
+#find isolated city number 
+def findCircleNum(isConnected):
+    if not isConnected or not isConnected[0]:
+        return 0 
 
+    seen = [False] * len(isConnected)
+    result = 0
+
+    def findLinkedCity(isConnected, seen, curr):
+        if seen[curr]:
+            return 
+        seen[curr] = True 
+
+        for i in range(len(isConnected)):
+            if not seen[i] and isConnected[curr][i] == 1:
+                findLinkedCity(isConnected, seen, i) 
+    
+    for i in range(len(isConnected)):
+        if not seen[i]:
+            result += 1 
+            findLinkedCity(isConnected, seen, i) 
+    
+    return result
