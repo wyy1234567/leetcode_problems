@@ -812,3 +812,21 @@ def findCircleNum(isConnected):
             findLinkedCity(isConnected, seen, i) 
     
     return result
+
+def maxSlidingWindow(nums, k):
+    result, arr = [], []
+
+    for index, num in enumerate(nums):
+
+        while arr and nums[arr[-1]] < num:
+            arr.pop()
+        
+        arr.append(index)
+
+        if arr[0] == index - k:
+            arr.pop(0) 
+        
+        if index >= k - 1:
+            result.append(nums[arr[0]])
+
+    return result
