@@ -848,3 +848,39 @@ def minSlidingWindow(nums, k):
             result.append(nums[arr[0]])
 
     return result
+
+import collections
+def findOrder(numCourses, prerequisites): 
+    result = []
+    #store {course: number of prerequisites}
+    course_number_needed = collections.defaultdict(int)
+
+    #sotre {prerequisite:course}
+    pre_to_course = collections.defaultdict(set)
+
+    for c in prerequisites:
+        course_number_needed[c[0]] += 1 
+        pre_to_course[c[1]].add(c[0])
+
+    queue = []
+    seen = [False] * numCourses
+    for num in range(numCourses):
+        if num not in course_number_needed:
+            queue.append(num)
+    
+    while queue:
+        current = queue.pop(0)
+        seen[current] = True 
+        result.append(current)
+
+        for course in pre_to_course[current]:
+            course_number_needed[course] -= 1 
+
+            if course_number_needed[course] == 0 and not seen[course]:
+                queue.append(course)
+    
+    for i in seen:
+        if not i:
+            return []
+            
+    return result
