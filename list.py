@@ -906,3 +906,24 @@ def canFinish(numCourses, prerequisites):
         if not dfs(i):
             return False
     return True
+    
+def maxPoints(points):
+    result = 0
+    for i in range(len(points)):
+        dic = {'cur':1}
+        same = 0 
+        for j in range(i+1, len(points)):
+            x, y = points[j][0], points[j][1]
+            slope = None
+            if x == points[i][0] and y == points[i][1]:
+                same += 1
+                continue 
+            if x == points[i][0]:
+                slope = 'curr'
+            else:
+                slope = (points[i][1]-y) * 1.0 /(points[i][0]-x)
+            if slope not in dic:
+                dic[slope] = 1 
+            dic[slope] += 1
+        result = max(result, max(dic.values())+same)
+    return result
