@@ -191,3 +191,36 @@ def myPow(x, n):
     f = function()
     
     return float(f) if n >= 0 else 1/f
+
+def myAtoi(s):
+    s = s.strip()
+    size = len(s)
+    s += ' '
+    isNegative = False
+    i = 0
+    ans = 0
+    
+    if s[i] == '+' or s[i] == '-':
+        if s[i] == '-':
+            isNegative = True 
+        i += 1 
+    
+    if i >= size or not s[i].isdigit():
+        return 0 
+    
+    while i <= size and s[i] == '0':
+        i += 1 
+    while i <= size and s[i].isdigit():
+        ans += ans * 10 + int(s[i])
+        i += 1
+        
+    if isNegative:
+        ans *= -1 
+    
+    if ans < -1 * 2 ** 31:
+        return -1 * 2 ** 31
+
+    if ans > 2 ** 31 - 1:
+        return 2**31 - 1
+    
+    return ans
