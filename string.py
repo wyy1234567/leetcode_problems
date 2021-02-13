@@ -224,3 +224,22 @@ def myAtoi(s):
         return 2**31 - 1
     
     return ans
+
+# Input: s = "(1+(2*3)+((8)/4))+1"
+# Output: 3
+# Explanation: Digit 8 is inside of 3 nested parentheses in the string.
+def maxDepth(s):
+    stack = []
+    res = 0
+    
+    for i in range(len(s)):
+        char = s[i]
+        
+        if char == '(':
+            stack.append('(')
+        
+        if char == ')':
+            res = max(res, len(stack))
+            stack.pop()
+            
+    return res
