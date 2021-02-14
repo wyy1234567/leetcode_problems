@@ -280,3 +280,16 @@ def ladderLength(beginWord, endWord, wordList):
                     if w not in seen:
                         queue.append(w)
     return 0
+
+def maxLengthBetweenEqualCharacters(s):
+    index = {}
+    result = -1 
+    
+    for i, char in enumerate(s):
+        if char not in index:
+            index[char] = [i]
+        else:
+            index[char].append(i)
+            result = max(result, index[char][-1] - index[char][0]-1)
+    
+    return result
