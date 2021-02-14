@@ -965,3 +965,45 @@ def maximalNetworkRank(n, roads):
             res = max(res, count)
             
     return res
+
+
+def orangesRotting(grid):
+    queue = []
+    result = 0
+    rows, cols = len(grid), len(grid[0])
+    r_dir, c_dir = [1,-1,0,0], [0,0,1,-1]
+    seen = [[False for _ in range(cols)] for _ in range(rows)]
+    
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] == 2:
+                queue.append([i, j])
+            if grid[i][j] == 0:
+                seen[i][j] = True
+    
+    while queue:
+        size = len(queue)
+        result += 1 
+        
+        for _ in range(size):
+            current = queue.pop(0)
+            r, c = current[0], current[1]
+            seen[r][c] = True 
+            
+            for i in range(4):
+                nr = r + r_dir[i]
+                nc = c + c_dir[i]
+                
+                if nr >= 0 and nr < rows and nc >= 0 and nc < cols and not seen[nr][nc] and grid[nr][nc] == 1:
+                    queue.append([nr, nc])
+                    grid[nr][nc] = 2
+    
+    for i in range(rows):
+        for j in range(cols):
+            if not seen[i][j]:
+                return -1 
+    
+    if result != 0:
+        return result - 1 
+    else:
+        return 0
