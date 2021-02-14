@@ -243,3 +243,40 @@ def maxDepth(s):
             stack.pop()
             
     return res
+
+def ladderLength(beginWord, endWord, wordList):
+    result = 0
+    words = set(wordList)
+    queue = [beginWord]
+    seen = set()
+    
+    def construct_dict(word_list):
+        d = {}
+        for word in word_list:
+            for i in range(len(word)):
+                s = word[:i] + "_" + word[i+1:]
+                d[s] = d.get(s, []) + [word]
+        return d
+    
+    word_dict = construct_dict(wordList)
+    
+    if endWord not in words:
+        return 0 
+    
+    while queue:
+        size = len(queue)
+        result += 1 
+        
+        for _ in range(size):
+            curr = queue.pop(0)
+            seen.add(curr)
+            if curr == endWord:
+                return result 
+            
+            for i in range(len(curr)):
+                path = curr[:i] + '_' + curr[i+1:]
+                neighbors = word_dict.get(path, [])
+                for w in neighbors:
+                    if w not in seen:
+                        queue.append(w)
+    return 0
