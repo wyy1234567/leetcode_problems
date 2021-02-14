@@ -17,7 +17,7 @@
 #     return [nhash[key] for key in sorted(nhash)]
 
 
-
+import collections
 #Binary Tree Maximum Path Sum II
 def maxSum(root):
     if not root:
@@ -166,4 +166,27 @@ class TreeNode:
             result += [level[::flag]]
             flag *= -1
         return result 
+    
+    def distanceK(self, root: TreeNode, target: TreeNode, K: int):
+
+        def dfs(node, par = None):
+            if node:
+                node.par = par
+                dfs(node.left, node)
+                dfs(node.right, node)
+
+        dfs(root)
+
+        queue = collections.deque([(target, 0)])
+        seen = {target}
+        while queue:
+            if queue[0][1] == K:
+                return [node.val for node, d in queue]
+            node, d = queue.popleft()
+            for nei in (node.left, node.right, node.par):
+                if nei and nei not in seen:
+                    seen.add(nei)
+                    queue.append((nei, d+1))
+
+        return []
         
