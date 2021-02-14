@@ -189,4 +189,26 @@ class TreeNode:
                     queue.append((nei, d+1))
 
         return []
+    
+    def averageOfLevels(self, root):
+        result = []
+        if not root:
+            return result 
+        
+        queue = [root]
+        
+        while queue:
+            size = len(queue)
+            curr = 0 
+            
+            for _ in range(size):
+                node = queue.pop(0)
+                curr += node.val 
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            
+            result.append(curr/size)
+        return result
         
