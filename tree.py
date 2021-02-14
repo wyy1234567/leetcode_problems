@@ -211,4 +211,26 @@ class TreeNode:
             
             result.append(curr/size)
         return result
+    
+    def findBottomLeftValue(self, root):
+        if not root:
+            return None
+        levels = []
+        queue = [root]
+        
+        while queue:
+            size = len(queue)
+            level = []
+            
+            for _ in range(size):
+                curr = queue.pop(0)
+                level.append(curr.val)
+                if curr.left:
+                    queue.append(curr.left)
+                if curr.right:
+                    queue.append(curr.right)
+                    
+            levels.append(level)
+        
+        return levels[-1][0]
         
