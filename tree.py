@@ -143,5 +143,27 @@ class TreeNode:
             return []
         
         return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
+
+    def zigzagLevelOrder(self, root):
+        result = []
+        if not root:
+            return result 
         
+        flag = 1
+        queue = [root]
+        
+        while queue: 
+            size = len(queue)
+            level = []
+            
+            for _ in range(size):
+                curr = queue.pop(0)
+                level.append(curr.val)
+                if curr.left:
+                    queue.append(curr.left)
+                if curr.right:
+                    queue.append(curr.right)
+            result += [level[::flag]]
+            flag *= -1
+        return result 
         
