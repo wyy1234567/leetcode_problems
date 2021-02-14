@@ -927,3 +927,41 @@ def maxPoints(points):
             dic[slope] += 1
         result = max(result, max(dic.values())+same)
     return result
+
+
+def maximalNetworkRank(n, roads):
+    road_dict = set()
+    freq = [[] for _ in range(n)]
+    road_count = collections.defaultdict(int)
+    
+    for road in roads:
+        road_count[road[0]] += 1 
+        road_count[road[1]] += 1 
+        road_dict.add((road[0], road[1]))
+        
+    for k, v in road_count.items():
+        freq[v].append(k)
+        
+    candidates = []
+    index, count = n-1, 0 
+    
+    while index >= 0 and count < 2:
+        if len(freq[index]) > 1 and count == 0:
+            candidates = freq[index]
+            break 
+        if freq[index]:
+            for r in freq[index]:
+                candidates.append(r)
+            count += 1 
+        index -= 1
+        
+    res = 0
+
+    for i in range(len(candidates)):
+        for j in range(i+1, len(candidates)):
+            count = road_count[candidates[i]] + road_count[candidates[j]]
+            if (candidates[i], candidates[j]) in road_dict or (candidates[j], candidates[i]) in road_dict:
+                count -= 1
+            res = max(res, count)
+            
+    return res
