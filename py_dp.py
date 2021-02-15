@@ -180,3 +180,30 @@ def trapWater(height):
         res += min(left[i], right[i]) - height[i]
     
     return res
+
+
+def findNumberOfLIS(nums):
+    n = len(nums)
+    if n <= 1:
+        return n
+    lengths = [1] * n #lengths[i] = longest ending in nums[i]
+    counts = [1] * n #count[i] = number of longest ending in nums[i]
+    
+    longest = float('-inf')
+    result = 0 
+    for i, num in enumerate(nums):
+        for j in range(i):
+            if num > nums[j]:
+                if lengths[j] >= lengths[i]:
+                    lengths[i] = lengths[j] + 1 
+                    counts[i] = counts[j]
+                elif lengths[j] + 1 == lengths[i]:
+                    counts[i] += counts[j]
+        longest = max(longest, lengths[i])
+    
+    for i, c in enumerate(counts):
+        if lengths[i] == longest:
+            result += c
+
+    return result
+            
