@@ -293,3 +293,18 @@ def maxLengthBetweenEqualCharacters(s):
             result = max(result, index[char][-1] - index[char][0]-1)
     
     return result
+
+# Input: S = "aab"
+# Output: "aba"
+def reorganizeString(S):
+    N = len(S)
+    A = []
+    s = sorted((S.count(x), x) for x in set(S))
+    print(s)
+    for c, x in sorted((S.count(x), x) for x in set(S)):
+        if c > (N+1)/2: return ""
+        A.extend(c * x)
+    print(A)
+    ans = [None] * N
+    ans[::2], ans[1::2] = A[N//2:], A[:N//2]
+    return "".join(ans)
