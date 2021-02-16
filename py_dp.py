@@ -207,3 +207,14 @@ def findNumberOfLIS(nums):
 
     return result
             
+
+from math import sqrt, ceil
+def numSquares(n):
+    limit = ceil(sqrt(n)) + 1
+    dp = [float('inf')] * (n+1)
+    dp[0] = 0
+    
+    for num in range(1, limit):
+        for i in range(num**2, n+1):
+            dp[i] = min(dp[i], 1+dp[i-num**2])
+    return dp[-1]
