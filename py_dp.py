@@ -235,3 +235,19 @@ def minPathSum(grid):
             grid[i][j] += min(grid[i-1][j], grid[i][j-1])
     
     return grid[rows-1][cols-1]
+
+
+def countSubstrings(s):
+    dp = [[False for _ in range(len(s))] for _ in range(len(s))]
+    count = 0 
+    for i in range(len(s)-1, -1, -1):
+        dp[i][i] = True 
+        count += 1 
+        for j in range(i+1, len(s)):
+            if j == i+1 and s[i] == s[j]:
+                dp[i][j] = True 
+                count += 1 
+            if j > i+1 and dp[i+1][j-1] and s[i] == s[j]:
+                dp[i][j] = True
+                count += 1
+    return count
