@@ -213,8 +213,25 @@ def numSquares(n):
     limit = ceil(sqrt(n)) + 1
     dp = [float('inf')] * (n+1)
     dp[0] = 0
-    
+
     for num in range(1, limit):
         for i in range(num**2, n+1):
             dp[i] = min(dp[i], 1+dp[i-num**2])
     return dp[-1]
+
+def minPathSum(grid):
+    rows, cols = len(grid), len(grid[0])
+    
+    #initialize the first row 
+    for i in range(1, cols):
+        grid[0][i] += grid[0][i-1]
+    
+    #initialize the first column
+    for i in range(1, rows):
+        grid[i][0] += grid[i-1][0] 
+        
+    for i in range(1, rows):
+        for j in range(1, cols):
+            grid[i][j] += min(grid[i-1][j], grid[i][j-1])
+    
+    return grid[rows-1][cols-1]
