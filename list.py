@@ -1007,3 +1007,16 @@ def orangesRotting(grid):
         return result - 1 
     else:
         return 0
+
+# Given a positive integer N, how many ways can we write it as a sum of consecutive positive integers?
+
+# Input: 5
+# Output: 2
+# Explanation: 5 = 5 = 2 + 3
+def consecutiveNumbersSum(N):
+    i, ans = 1, 0
+    while N > i * (i - 1) // 2:
+        if (N - i * (i - 1) // 2) % i == 0:
+            ans += 1
+        i += 1
+    return ans
