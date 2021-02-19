@@ -308,3 +308,28 @@ def reorganizeString(S):
     ans = [None] * N
     ans[::2], ans[1::2] = A[N//2:], A[:N//2]
     return "".join(ans)
+
+def partitionLabels(S):
+    dic = {}
+    merged = []
+    for i, c in enumerate(S):
+        if c not in dic:
+            dic[c] = [i, i]
+        else:
+            dic[c][-1] = i 
+            
+    intervals = []
+    for val in dic.values():
+        intervals.append(val)
+    
+    intervals.sort()
+    merged = []
+    
+    for i in intervals:
+        if not merged or i[0] > merged[-1][1]:
+            merged.append(i)
+        else:
+            merged[-1][1] = max(merged[-1][1], i[1])
+            
+        
+    return [(j-i+1) for i, j in merged]
