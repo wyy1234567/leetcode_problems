@@ -1034,6 +1034,43 @@ def maxAreaOfIsland(grid):
     
     return max(area(r,c) for r in range(len(grid)) for c in range(len(grid[0])))
 
+def maxAreaOfIsland1(grid):
+    if not grid or not grid[0]:
+        return 0 
+    
+    rows, cols = len(grid), len(grid[0])
+    result = 0 
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] == 1:
+                curr_area = area(i,j,grid)
+                result = max(result, curr_area)
+    
+    return result
+    
+def area(i, j, grid):
+    rows, cols = len(grid), len(grid[0])
+    queue = [[i, j]]
+    row_dir = [1,-1,0,0]
+    col_dir = [0,0,1,-1]
+    grid[i][j] = 'w'
+    area = 1
+    while queue:
+        curr = queue.pop(0)
+        # area += 1 
+        cr, cc = curr[0], curr[1]
+        grid[cr][cc] = 'w'
+        
+        for k in range(4):
+            nr, nc = cr+row_dir[k], cc+col_dir[k]
+            
+            if nr >= 0 and nr < rows and nc >= 0 and nc < cols and grid[nr][nc] == 1:
+                grid[nr][nc] = 'w'
+                queue.append([nr, nc])
+                area += 1
+            
+        return area
+        
 def numIslands(grid):
     rows, cols = len(grid), len(grid[0])
     result = 0 
