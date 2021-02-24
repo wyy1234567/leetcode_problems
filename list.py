@@ -1033,3 +1033,33 @@ def maxAreaOfIsland(grid):
                 area(r, c-1) + area(r, c+1))
     
     return max(area(r,c) for r in range(len(grid)) for c in range(len(grid[0])))
+
+def numIslands(grid):
+    rows, cols = len(grid), len(grid[0])
+    result = 0 
+    def water_island(i, j):
+        row_dir = [0,0,1,-1]
+        col_dir = [-1,1,0,0]
+        queue = [[i, j]]
+        
+        while queue:
+            curr = queue.pop()
+            cr = curr[0]
+            cc = curr[1]
+            grid[cr][cc] = 'w'
+            for k in range(4):
+                nr = cr + row_dir[k]
+                nc = cc + col_dir[k]
+                if nr >= 0 and nr < rows and nc >= 0 and nc < cols and grid[nr][nc] == '1':
+                    queue.append([nr, nc])
+    
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] == '1':
+                result += 1 
+                water_island(i,j)
+    return result 
+
+
+    
+
