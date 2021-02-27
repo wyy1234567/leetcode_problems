@@ -265,3 +265,19 @@ def longestCommonSubsequence(text1, text2):
                 dp[i][j] = max(dp[i-1][j], dp[i][j-1])
                 
     return dp[rows][cols]
+
+
+def minDistance(word1: str, word2: str) -> int:
+    rows, cols = len(word1), len(word2)
+    dp = [[0 for _ in range(cols+1)] for _ in range(rows + 1)]
+    
+    for i in range(rows + 1):
+        for j in range(cols + 1):
+            if i == 0 or j == 0:
+                dp[i][j] = i+j
+            elif word1[i-1] == word2[j-1]:
+                dp[i][j] = dp[i-1][j-1]
+            else:
+                dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + 1 
+    
+    return dp[rows][cols]
