@@ -292,3 +292,26 @@ def numTrees(n):
             dp[i] += dp[j-1] * dp[i-j]
     return dp[n]
         
+# Given strings s1, s2, and s3, find whether s3 is formed by an interleaving of s1 and s2.
+# An interleaving of two strings s and t is a configuration where they are divided into non-empty substrings such that:
+# Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac" Output: true
+def isInterleave(s1, s2, s3):
+
+    if len(s1) + len(s2) != len(s3):
+        return False 
+    
+    dp = [[False for _ in range(len(s2) + 1)] for _ in range(len(s1) + 1)]
+    dp[0][0] = True 
+    
+    for i in range(len(s3)):
+        for l1 in range(i+2):
+            if l1 > len(s1):
+                continue 
+            l2 = i+1-l1 
+            if l2 > len(s2):
+                continue 
+            
+            if (l1 > 0 and dp[l1-1][l2] and s3[i] == s1[l1-1]) or (l2 > 0 and dp[l1][l2-1] and s2[l2 - 1] == s3[i]):
+                dp[l1][l2] = True 
+    
+    return dp[len(s1)][-1]
