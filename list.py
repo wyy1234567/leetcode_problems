@@ -1114,3 +1114,25 @@ def canAttendMeetings(intervals):
         if end[i-1] > start[i]:
             return False 
     return True 
+
+# Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.
+def minMeetingRooms(intervals):
+    # Write your code here
+    start, end = [], []
+    res = 0 
+
+    for i in intervals:
+        start.append(i[0])
+        end.append(i[1])
+    
+    start.sort()
+    end.sort()
+    index = 0 
+
+    for time in start:
+        if time < end[index]:
+            res += 1 
+        else:
+            index += 1
+        
+    return res
