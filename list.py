@@ -76,6 +76,50 @@ class ListNode:
             curr.next = ListNode(carry, None)
         return newHead.next
 
+    def sortList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head 
+        
+        second = self.break_half(head)
+        sorted_first = self.sortList(head)
+        sorted_second = self.sortList(second)
+        
+        return self.merge(sorted_first, sorted_second)
+        
+    def break_half(self, head):
+        if not head or not head.next:
+            return head 
+
+        slow, fast = head, head.next 
+        while fast and fast.next:
+            fast = fast.next.next 
+            slow = slow.next 
+        
+        mid = slow.next
+        slow.next = None 
+        
+        return mid
+    def merge(self, l1, l2):
+        if not l1 and not l2:
+            return None 
+        
+        if not l1:
+            return l2 
+        
+        if not l2:
+            return l1 
+        
+        new_head = None 
+        
+        if l1.val < l2.val:
+            new_head = l1 
+            new_head.next = self.merge(l1.next, l2)
+        else:
+            new_head = l2
+            new_head.next = self.merge(l1, l2.next)
+        
+        return new_head
+
     def reverseList(self, head: ListNode) -> ListNode:
         if not head or not head.next:
             return head
