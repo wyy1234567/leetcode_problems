@@ -1098,5 +1098,19 @@ def numIslands(grid):
     return result 
 
 
-    
+# Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), determine if a person could attend all meetings.
+def canAttendMeetings(intervals):
+    # Write your code here
+    start, end = [], []
 
+    for i in intervals:
+        start.append(i[0])
+        end.append(i[1])
+    
+    start.sort()
+    end.sort()
+
+    for i in range(1, len(start)):
+        if end[i-1] > start[i]:
+            return False 
+    return True 
