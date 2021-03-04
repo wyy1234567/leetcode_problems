@@ -315,3 +315,12 @@ def isInterleave(s1, s2, s3):
                 dp[l1][l2] = True 
     
     return dp[len(s1)][-1]
+
+
+def minimumTotal(triangle):
+    rows = len(triangle)
+    
+    for r in range(rows - 2, -1, -1):
+        for c in range(len(triangle[r])):
+            triangle[r][c] += min(triangle[r+1][c], triangle[r+1][c+1])
+    return triangle[0][0]
