@@ -233,4 +233,29 @@ class TreeNode:
             levels.append(level)
         
         return levels[-1][0]
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    
+    def sortedListToBST(self, head):
+        if not head:
+            return None 
+        slow, fast = head, head 
+        prev_slow = None 
+        while fast and fast.next:
+            prev_slow = slow
+            fast = fast.next.next
+            slow = slow.next
+            
+        root = TreeNode(slow.val)
+        if prev_slow:
+            prev_slow.next = None 
+            root.left = self.sortedListToBST(head)
+            root.right = self.sortedListToBST(slow.next)
+        return root
         
+
+
