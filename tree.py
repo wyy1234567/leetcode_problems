@@ -233,6 +233,26 @@ class TreeNode:
             levels.append(level)
         
         return levels[-1][0]
+    
+    def flatten(self, root):
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        if not root:
+            return None 
+        self.flatten(root.left)
+        self.flatten(root.right)
+        
+        if root.left:
+            right = root.right 
+            root.right = root.left 
+            root.left = None 
+            last = root
+            while last.right:
+                last = last.right 
+            last.right = right 
+        
+        
 
 # Definition for singly-linked list.
 class ListNode:
