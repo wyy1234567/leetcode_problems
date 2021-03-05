@@ -88,6 +88,62 @@ class TreeNode:
         balance(root)
         return self.ans
 
+    def boundaryOfBinaryTree(self, root):
+        # write your code here
+        if not root:
+            return []
+        left = self.find_left(root.left)
+        leaves = self.find_leaves(root)
+        right = self.find_right(root.right)
+        
+        if left and leaves and left[-1] == leaves[0]:
+            leaves = leaves[1:]
+        if leaves and right and leaves[-1] == right[-1]:
+            leaves = leaves[:-1]
+        return [root.val] + left + leaves + list(reversed(right))
+
+
+    def find_left(self, root):
+        res = []
+        while root is not None:
+            res.append(root.val)
+            if root.left:
+                root = root.left 
+            elif root.right:
+                root = root.right 
+            else:
+                break 
+        return res 
+    
+    def find_right(self, root):
+        res = []
+        while root is not None:
+            res.append(root.val)
+            if root.right:
+                root = root.right 
+            elif root.left:
+                root = root.left 
+            else:
+                break 
+        return res 
+
+
+    def find_leaves(self, root):
+        if not root:
+            return []
+        res = []
+        stack = [root]
+
+        while stack:
+            node = stack.pop()
+            if not node.left and not node.right:
+                res.append(node.val)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+        return res
+        
     def pruneTree(self, root: TreeNode) -> TreeNode:
         if not root:
             return root
