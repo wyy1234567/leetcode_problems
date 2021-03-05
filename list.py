@@ -1180,3 +1180,18 @@ def minMeetingRooms(intervals):
             index += 1
         
     return res
+
+def sortArrayByParity(A):
+    if len(A) == 1:
+        return A
+    
+    even, odd = -1, 0 
+    
+    while odd < len(A):
+        if A[odd] % 2 == 1:
+            odd += 1 
+        else:
+            even += 1 
+            A[even], A[odd] = A[odd], A[even]
+            odd += 1
+    return A
