@@ -74,6 +74,20 @@ class TreeNode:
         
         return root
     
+    def distributeCoins(self, root):
+        self.ans = 0 
+        
+        def balance(node):
+            if not node:
+                return 0
+            left = balance(node.left)
+            right = balance(node.right)
+            self.ans += abs(left) + abs(right)
+            return node.val - 1 + left + right
+        
+        balance(root)
+        return self.ans
+
     def pruneTree(self, root: TreeNode) -> TreeNode:
         if not root:
             return root
