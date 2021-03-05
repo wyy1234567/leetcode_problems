@@ -54,6 +54,25 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right 
+        self.next = None 
+
+    def connect(self, root):
+        if not root:
+            return None 
+        
+        level_first = root 
+        
+        while level_first:
+            curr = level_first
+            while curr:
+                if curr.left:
+                    curr.left.next = curr.right
+                if curr.right and curr.next:
+                    curr.right.next = curr.next.left 
+                curr = curr.next
+            level_first = level_first.left 
+        
+        return root
     
     def pruneTree(self, root: TreeNode) -> TreeNode:
         if not root:
