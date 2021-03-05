@@ -351,3 +351,32 @@ def decodeString(s):
         else:
             curString += c
     return curString
+
+def multiply(num1, num2):
+    if not num1 or not num2:
+        return 0
+    
+    l1, l2 = len(num1), len(num2)
+    res = [0] * (l1 + l2)
+    
+    for i in range(l1 - 1, -1, -1):
+        for j in range(l2-1, -1, -1):
+            mul = int(num1[i]) * int(num2[j])
+            pos_low = i+j+1 
+            pos_high = j+i
+            mul += res[pos_low]
+            res[pos_low] = mul % 10 
+            res[pos_high] += mul // 10
+    
+    ans = ''
+    index = 0
+    
+    while index < len(res) and res[index] == 0:
+        index += 1
+    
+    for i in range(index, len(res)):
+        ans += str(res[i])
+        
+    if ans == '':
+        return '0'
+    return ans
