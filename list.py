@@ -1195,3 +1195,22 @@ def sortArrayByParity(A):
             A[even], A[odd] = A[odd], A[even]
             odd += 1
     return A
+
+def maxScore(cardPoints, k):
+    if k == len(cardPoints):
+        return sum(cardPoints)
+    
+    total = sum(cardPoints)
+    
+    window = 0
+    window_size = len(cardPoints) - k
+    for i in range(window_size):
+        window += cardPoints[i]
+    max_score = total - window
+    
+    for i in range(0,k):
+        window = window - cardPoints[i] + cardPoints[i+window_size]
+        curr_points = total - window 
+        max_score = max(max_score, curr_points)
+    
+    return max_score
