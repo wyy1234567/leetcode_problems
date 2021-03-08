@@ -31,3 +31,33 @@ def pow_iteration(x, n):
     result *=  x 
 
     return result
+
+def threeSum(nums):
+        if len(nums) < 3:
+            return []
+        nums.sort()
+        size = len(nums)
+        result = []
+        def two_sum(nums, target, left, right, result):
+            last_pair = None 
+            while left < right:
+                curr_sum = nums[left] + nums[right]
+                if curr_sum == target:
+                    if (nums[left], nums[right]) != last_pair:
+                        result.append([-target, nums[left], nums[right]])
+                    last_pair = (nums[left], nums[right])
+                    right -= 1
+                    left += 1
+                elif curr_sum < target:
+                    left += 1 
+                else:
+                    right -= 1
+        
+        for i in range(size):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue 
+            two_sum(nums, -nums[i], i+1, size - 1, result)
+        
+        return result
+    
+    
