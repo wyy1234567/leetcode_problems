@@ -324,3 +324,13 @@ def minimumTotal(triangle):
         for c in range(len(triangle[r])):
             triangle[r][c] += min(triangle[r+1][c], triangle[r+1][c+1])
     return triangle[0][0]
+
+
+def uniquePaths(m, n):
+    matrix = [[1 for _ in range(n)] for _ in range(m)]
+    
+    for i in range(1, m):
+        for j in range(1, n):
+            matrix[i][j] = matrix[i-1][j] + matrix[i][j-1]
+            
+    return matrix[m-1][n-1]
