@@ -101,3 +101,20 @@ def merge(l1, l2):
     res.extend(l1[i:] or l2[j:])
     return res
 
+def findMaximumXOR(nums):
+    res = 0
+    mask = 0 
+    for i in range(31,-1,-1):
+        mask = mask | (1 << i)
+        dic = set()
+        
+        for num in nums:
+            dic.add(num & mask)    
+        
+        temp = res | (1 << i) 
+        
+        for prefix in dic:
+            if temp ^ prefix in dic:
+                res = temp
+                break     
+    return res
