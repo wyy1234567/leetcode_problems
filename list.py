@@ -1214,3 +1214,23 @@ def maxScore(cardPoints, k):
         max_score = max(max_score, curr_points)
     
     return max_score
+
+# Input: chars = ["a","a","b","b","c","c","c"]
+# Output: Return 6, and the first 6 characters of the input array should be: ["a","2","b","2","c","3"]
+# Explanation: The groups are "aa", "bb", and "ccc". This compresses to "a2b2c3".
+def compression(chars):
+    index, count = 0, 1 
+
+    for j in range(1, len(chars)+1):
+        if j < len(chars) and chars[j] == chars[j-1]:
+            count += 1 
+        else:
+            chars[index] = chars[j-1]
+            index += 1 
+            if count > 1:
+                for c in str(count):
+                    chars[index] = c 
+                    index += 1
+            count = 1 
+    
+    return index
