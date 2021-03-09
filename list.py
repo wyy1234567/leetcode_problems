@@ -1234,3 +1234,26 @@ def compression(chars):
             count = 1 
     
     return index
+
+# Given a list of airline tickets represented by pairs of departure and arrival airports [from, to], reconstruct the itinerary in order. 
+# All of the tickets belong to a man who departs from JFK. Thus, the itinerary must begin with JFK.
+# Input: [["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]]
+# Output: ["JFK", "MUC", "LHR", "SFO", "SJC"]
+def findItinerary(tickets):
+    graph = collections.defaultdict(list)
+        
+    for s, d in tickets:
+        graph[s].append(d)
+        graph[s].sort(reverse=True)
+
+    stack = ["JFK"]
+    res = []
+    # print(graph)
+    while stack:
+        curr = stack[-1]
+        if curr in graph and len(graph[curr]) > 0:
+            stack.append(graph[curr].pop())
+        else:
+            res.append(stack.pop())
+    return res[::-1]
+            
