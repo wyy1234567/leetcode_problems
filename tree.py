@@ -340,6 +340,31 @@ class TreeNode:
             while last.right:
                 last = last.right 
             last.right = right 
+    
+# Given an array of numbers, verify whether it is the correct preorder traversal sequence of a binary search tree.
+
+#preorder: root -> left -> right
+#           5 
+#         /   \
+#       2      6
+#     /   \
+#    1      3              => [5, 2, 1, 3, 6]
+
+    def verifyPreorder(self, preorder):
+        low = float('-inf')
+        stack = []
+
+        for p in preorder:
+            if p < low:
+                return False 
+            while stack and p > stack[-1]:
+                low = stack[-1]
+                stack.pop()
+            stack.append(p)
+        
+        return True
+
+    
         
         
 
