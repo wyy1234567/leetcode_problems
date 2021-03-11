@@ -334,3 +334,23 @@ def uniquePaths(m, n):
             matrix[i][j] = matrix[i-1][j] + matrix[i][j-1]
             
     return matrix[m-1][n-1]
+
+# Input: words = ["a","b","ba","bca","bda","bdca"]
+# Output: 4
+# Explanation: One of the longest word chain is "a","ba","bda","bdca".
+def longestStrChain(words):
+
+    dp = {}
+    result = 1 
+
+    for word in sorted(words, key=len):
+        dp[word] = 1 
+
+        for i in range(len(word)):
+            prev = word[:i] + word[i+1:]
+            
+            if prev in dp:
+                dp[word] = max(dp[prev]+1, dp[word])
+                result = max(dp[word], result)
+    
+    return result
