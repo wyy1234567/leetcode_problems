@@ -1305,4 +1305,20 @@ def floodFill(image, sr, sc, newColor):
                 image[i][j] = newColor
     
     return image
+
+# Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+def sortedSquares(nums):
+    size = len(nums)
+    result = [None] * size 
+    left, right = 0, size - 1 
+
+    for i in range(size-1, -1, -1):
+        if abs(nums[left]) < abs(nums[right]):
+            result[i] = nums[right] * nums[right]
+            right -= 1 
+        else:
+            result[i] = nums[left] * nums[left]
+            left += 1 
+    
+    return result
         
