@@ -364,7 +364,37 @@ class TreeNode:
         
         return True
 
-    
+    # Convert a BST to a sorted circular doubly-linked list in-place. Think of the left and right pointers as synonymous to the previous and next pointers in a doubly-linked list.
+    #head -> left_subtree -> root -> right_subtree -> left_subtree 
+
+    def treeToDoublyList(self, root):
+        if not root:
+            return None 
+
+        def dfs(root):
+            if not root:
+                return None, None 
+            
+            left_head, left_tail = dfs(root.left)
+            right_head, right_tail = dfs(root.right)
+
+            if left_tail:
+                left_tail.right = root 
+                root.left = left_tail 
+            if right_head:
+                root.right = right_head 
+                right_head.left = root 
+            
+            head = left_head or root or right_head 
+            tail = right_tail or root or left_tail 
+
+            return head, tail
+
+        head, tail = dfs(root)
+        tail.right = head 
+        head.left = tail 
+
+        return head
         
         
 
@@ -392,4 +422,7 @@ class ListNode:
         return root
         
 
-
+class Node:
+    def __init__(self, val=0):
+        self.left, self.right = None, None
+        self.val = val 

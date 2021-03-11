@@ -1257,3 +1257,22 @@ def findItinerary(tickets):
             res.append(stack.pop())
     return res[::-1]
             
+# Given a non-empty array of non-negative integers nums, the degree of this array is defined as the maximum frequency of any one of its elements.
+# Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.
+def findShortestSubArray(nums):
+    if len(nums) == 1:
+        return 1
+    
+    mapping = collections.defaultdict(list)
+    degree = 0 
+    length = float('inf')
+    
+    for index, num in enumerate(nums):
+        mapping[num].append(index)
+        degree = max(degree, len(mapping[num]))
+        
+    for k, v in mapping.items():
+        if len(v) == degree:
+            length = min(length, v[-1]-v[0]+1)
+    
+    return length
