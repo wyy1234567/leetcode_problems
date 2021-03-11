@@ -1276,3 +1276,33 @@ def findShortestSubArray(nums):
             length = min(length, v[-1]-v[0]+1)
     
     return length
+
+
+def floodFill(image, sr, sc, newColor):
+    old = image[sr][sc]
+    rows, cols = len(image), len(image[0])
+    
+    queue = collections.deque()
+    queue.append([sr, sc])
+    
+    row_dir = [0,0,1,-1]
+    col_dir = [1,-1,0,0]
+    
+    while queue:
+        curr = queue.popleft()
+        r, c = curr[0], curr[1]
+        image[r][c] = 'mark'
+        
+        for i in range(4):
+            nr, nc = r + row_dir[i], c + col_dir[i]
+            
+            if nr >= 0 and nr < rows and nc >= 0 and nc < cols and image[nr][nc] == old:
+                queue.append([nr, nc])
+    
+    for i in range(rows):
+        for j in range(cols):
+            if image[i][j] == 'mark':
+                image[i][j] = newColor
+    
+    return image
+        
