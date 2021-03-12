@@ -443,7 +443,28 @@ class TreeNode:
         
         return recur(0, len(inorder)-1)
 
+# Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where each path's sum equals targetSum.
+    def path_sumII(self, root, targetSum):
+        if not root:
+            return []
         
+        res = []
+        
+        def backtrack(root, target, path):
+
+            if target == root.val and (not root.left) and (not root.right):
+                path.append(root.val)
+                res.append(path)
+                return 
+            else:
+                if root.left:   
+                    backtrack(root.left, target-root.val, path+[root.val])
+                if root.right:
+                    backtrack(root.right, target-root.val, path+[root.val])
+        
+        backtrack(root, targetSum, [])
+        return res
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
