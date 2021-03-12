@@ -419,6 +419,30 @@ class TreeNode:
                 break 
                 
         return root
+    
+    #       3
+    #     /    \ 
+    #    9     20
+    #         /  \
+    #        15   7
+    # postorder(left->rght->this): [9,15,7,20,3]
+    # inorder(left->this->right):[9,3,15,20,7]
+    def build_tree_postorder(self, inorder, postorder):
+        map_inorder = {}
+        for i, v in enumerate(inorder):
+            map_inorder[v] = i 
+        
+        def recur(low, high):
+            if low > high:
+                return None 
+            root = TreeNode(postorder.pop())
+            index_root = map_inorder[root.val]
+            root.right = recur(index_root+1, high)
+            root.left = recur(low, index_root - 1)
+            return root 
+        
+        return recur(0, len(inorder)-1)
+
         
 # Definition for singly-linked list.
 class ListNode:
