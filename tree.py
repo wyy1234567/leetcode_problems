@@ -395,9 +395,31 @@ class TreeNode:
         head.left = tail 
 
         return head
+# Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
+    #       3
+    #     /    \ 
+    #    9     20
+    #         /  \
+    #        15   7
+    # preorder(this->left->rght): [3,9,20,15,7]
+    # inorder(left->this->right):[9,3,15,20,7]
+    def build_tree_preorder(self, preorder, inorder):
+        if not preorder and not inorder:
+            return None 
         
+        if len(preorder) == 1 and len(inorder) == 1:
+            return TreeNode(preorder[0])
         
-
+        root_val = preorder[0]
+        root = TreeNode(root_val)
+        for i in range(len(inorder)):
+            if inorder[i] == root_val:
+                root.left = self.build_tree_preorder(preorder[1:i+1], inorder[:i])
+                root.right = self.build_tree_preorder(preorder[i+1:], inorder[i+1:])
+                break 
+                
+        return root
+        
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
