@@ -464,6 +464,49 @@ class TreeNode:
         
         backtrack(root, targetSum, [])
         return res
+    
+
+    def sumNumbers(self, root: TreeNode) -> int:
+        if not root:
+            return 0 
+        
+        if not root.left and not root.right:
+            return root.val 
+        
+        paths = self.find_path(root)
+        
+        res = 0 
+        
+        for p in paths:
+            num = 0
+            for i in range(len(p)):
+                num = num + p[i] * (10 ** i)
+            res += num
+        return res
+        
+    
+    def find_path(self, root):
+        if not root:
+            return []
+        
+        if not root.left and not root.right:
+            return [[root.val]]
+        
+        
+        left = self.find_path(root.left)
+        right = self.find_path(root.right) 
+        
+        res = []
+        
+        for l in left:
+            l.append(root.val)
+            res.append(l)
+            
+        for r in right:
+            r.append(root.val)
+            res.append(r)
+            
+        return res
 
 # Definition for singly-linked list.
 class ListNode:
