@@ -1322,3 +1322,20 @@ def sortedSquares(nums):
     
     return result
         
+
+def minSubArrayLen(target, nums):
+    n = len(nums)
+    ans = float('inf')
+    left, count = 0, 0 
+    
+    for i in range(n):
+        count += nums[i]
+        while count >= target:
+            ans = min(ans, i+1-left)
+            count -= nums[left]
+            left += 1 
+    
+    if ans != float('inf'):
+        return ans 
+    else:
+        return 0
