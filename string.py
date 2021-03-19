@@ -399,3 +399,22 @@ def convertToTitle(col):
         col = (col - char) // 26 
     
     return res[::-1]
+
+def restoreIpAddresses(s):
+    res = []
+    
+    def backtrack(s, path, field):
+        if field == 4 and not s:
+            res.append(path[1:])
+        elif field == 4 or not s:
+            return 
+        else:
+            backtrack(s[1:], path+'.'+s[0:1], field+1)
+            if s[0] != '0' and len(s) > 1:
+                backtrack(s[2:], path+'.'+s[0:2], field + 1)
+                
+                if len(s) > 2 and int(s[0:3]) <= 255:
+                    backtrack(s[3:], path+'.'+s[0:3], field + 1)
+    
+    backtrack(s, "", 0)
+    return res
