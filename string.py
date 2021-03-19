@@ -418,3 +418,21 @@ def restoreIpAddresses(s):
     
     backtrack(s, "", 0)
     return res
+
+def partition(s):
+    res = []
+    
+    def backtrack(s, path):
+        if not s:
+            res.append(path)
+        else:
+            for i in range(1, len(s)+1):
+                if is_palindromic(s[:i]):
+                    backtrack(s[i:], path+[s[:i]])
+    backtrack(s, [])
+    
+    return res
+                
+    
+def is_palindromic(s):
+    return s == s[::-1]
