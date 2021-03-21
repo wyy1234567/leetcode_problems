@@ -1339,3 +1339,17 @@ def minSubArrayLen(target, nums):
         return ans 
     else:
         return 0
+
+def combinationSum3(k, n):
+    res = []
+    def backtrack(target, count, path, start):
+        if count == k and target == 0:
+            res.append(path)
+        elif target < 0:
+            return 
+        else:
+            for num in range(start, 10):
+                backtrack(target - num, count + 1, path + [num], num+1)
+    
+    backtrack(n, 0, [], 1)
+    return res
