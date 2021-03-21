@@ -1353,3 +1353,27 @@ def combinationSum3(k, n):
     
     backtrack(n, 0, [], 1)
     return res
+
+def summaryRanges(nums):
+    if not nums:
+        return []
+    if len(nums) == 1:
+        return [str(nums[0])]
+    
+    intervals = []
+    res = []
+    
+    for num in nums:
+        if not intervals or num > intervals[-1][1] + 1:
+            intervals.append([num, num])
+        else:
+            intervals[-1][1] = max(intervals[-1][1], num)
+    
+    for interval in intervals:
+        start, last = interval[0], interval[1]
+        if start == last:
+            res.append(str(start))
+        else:
+            res.append(str(start)+'->'+str(last))
+    
+    return res
